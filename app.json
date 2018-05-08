@@ -1,6 +1,15 @@
 {
   "expo": {
     "sdkVersion": "27.0.0",
-    "orientation":"portrait" 
+    "orientation":"portrait",
+    "name": "Wanna Play?",
+    "icon": "./app/assets/images/logo.png",
+    "version": "0.01",
+    "ios": {
+      "bundleIdentifier": "com.wannaplaydevs.wannaplay"
+    },
+    "android": {
+      "package": "com.wannaplaydevs.wannaplay"
+    }
   }
 }
