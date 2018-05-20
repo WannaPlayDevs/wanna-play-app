@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { createRootNavigator } from './router'
 import { isLoggedIn } from './auth'
 
+import { ApolloProvider } from 'react-apollo';
+import { store, client } from './src/store';
+
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -27,6 +30,10 @@ export default class App extends Component {
     }
 
     const Layout = createRootNavigator(loggedIn)
-    return <Layout />
+    return(
+      <ApolloProvider store={store} client={client}>
+        <Layout />        
+      </ApolloProvider>
+    )
   }
 }

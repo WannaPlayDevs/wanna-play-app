@@ -1,49 +1,24 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Linking, View } from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import React, {Component} from 'react';
+import {View, FlatList} from 'react-native';
+import {graphql} from 'react-apollo';
 
-const images = [
-  {
-    key: 1,
-    name: "Nathan Anderson",
-    image: require("../../assets/images/1.jpg"),
-    url: "https://unsplash.com/photos/C9t94JC4_L8"
-  },
-  {
-    key: 2,
-    name: "Jamison McAndie",
-    image: require("../../assets/images/2.jpg"),
-    url: "https://unsplash.com/photos/waZEHLRP98s"
-  },
-  {
-    key: 3,
-    name: "Alberto Restifo",
-    image: require("../../assets/images/3.jpg"),
-    url: "https://unsplash.com/photos/cFplR9ZGnAk"
-  },
-  {
-    key: 4,
-    name: "John Towner",
-    image: require("../../assets/images/4.jpg"),
-    url: "https://unsplash.com/photos/89PFnHKg8HE"
-  }
-]
+import GET_LINKS from '../graphql/queries/getLinks'
+import Links from '../components/Links'
 
-export default () => (
-  <View style={{ flex: 1 }}>
-    <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-      {images.map(({ name, image, url, key }) => (
-        <Card title={`CARD ${key}`} image={image} key={key}>
-          <Text style={{ marginBottom: 10 }}>
-            Photo by {name}.
-          </Text>
-          <Button
-            backgroundColor="#03A9F4"
-            title="VIEW NOW"
-            onPress={() => Linking.openURL(url)}
-          />
-        </Card>
-      ))}
-    </ScrollView>
-  </View>
-)
+class Home extends Component {
+
+  _renderItem = ({ item }) => <Links item={item}/>
+
+  render(){
+    const { data } = this.props
+    return (
+      <FlatList
+        data ={data.links}
+        keyExtractor={item => item.id}
+        renderItem={this._renderItem}
+      />
+    )
+  }  
+}
+
+export default graphql(GET_LINKS)(Home)
