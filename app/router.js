@@ -12,6 +12,7 @@ import LogIn from './src/screens/LogIn'
 import SignUp from './src/screens/SignUp'
 import Home from './src/screens/Home'
 import Profile from './src/screens/Profile'
+import Perfil from './src/screens/Perfil'
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -48,11 +49,12 @@ export const LoggedIn = TabNavigator(
         tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name='home' size={30} color={tintColor} />
-        )
+        ),
+        headerStyle
       }
     },
     Profile: {
-      screen: Profile,
+      screen: Perfil,
       navigationOptions: {
         tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor }) => (
@@ -64,7 +66,7 @@ export const LoggedIn = TabNavigator(
   {
     tabBarOptions: {
       style: {
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
       }
     }
   }

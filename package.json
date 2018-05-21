@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "apollo-client": "1.9.0-0",
+    "apollo-link-context": "^1.0.8",
+    "apollo-link-http": "^1.5.4",
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-apollo": "^1.4.8",
