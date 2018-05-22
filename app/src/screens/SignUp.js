@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { Card, Button, FormLabel, FormInput } from "react-native-elements";
+import Modal from "react-native-modal";
+
 import { onLogIn } from "../../auth";
 
 import Login from '../screens/LogIn'
@@ -16,9 +18,12 @@ class Signup extends Component {
     password: '',
     email: '',
     registered: false,
+    modal: true,
   }
 
   _onChangeText = (text, type) => this.setState({ [type]: text })
+
+  _toggleModal = () => this.setState({ modal: false });
 
   _onSignupPress = async () => {
     const { username, password, email } = this.state
@@ -41,10 +46,17 @@ class Signup extends Component {
   }
 
   render (){
-    if(this.state.registered){
-      console.log('registradoooo!')
+    if (this.state.registered){
       return (
-        <Text style={{fontSize: 60}}>Logueate para iniciar sesion</Text>
+        <View>
+        <Modal style={{backgroundColor: 'yellow', flex:1}} backdropOpacity={0.8} isVisible={this.state.modal}>
+          <View>
+            <Text>Logueate para iniciar sesion</Text>
+            <Button title="OK" onPress={this._toggleModal} />
+          </View>
+        </Modal>
+        {this.state.modal ? null : this.props.navigation.navigate("Landing")}
+        </View>
       )
     }
     return (

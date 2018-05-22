@@ -61,6 +61,15 @@ export const LoggedIn = TabNavigator(
           <FontAwesome name='user' size={30} color={tintColor} />
         )
       }
+    },
+    Logout: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarLabel: 'Logout',
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name='user' size={30} color={tintColor} />
+        )
+      }
     }
   },
   {
