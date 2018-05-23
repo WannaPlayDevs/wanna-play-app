@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
-import { Card, Button, FormLabel, FormInput } from "react-native-elements";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Card, Button, FormLabel, FormInput, FormValidationMessage } from "react-native-elements";
 import Modal from "react-native-modal";
 
 import { onLogIn } from "../../auth";
@@ -19,6 +19,7 @@ class Signup extends Component {
     email: '',
     registered: false,
     modal: true,
+    errors: [],
   }
 
   _onChangeText = (text, type) => this.setState({ [type]: text })
@@ -28,37 +29,48 @@ class Signup extends Component {
   _onSignupPress = async () => {
     const { username, password, email } = this.state
 
-    const { data } = await this.props.mutate({
+    const { data, errors } = await this.props.mutate({
       variables: {
         username,
         email,
         password,
       }
-    })
+    }).catch(res => {
+      const errors = res.graphQLErrors.map(error => error.message);
+      this.setState({ errors });
+    });
     try {
       this.setState({ registered: true })
     } catch (error) {
       throw error
-      console.log('error redirect')
     }
-    
-    console.log(this.state)
   }
+
+  renderErrors () {
+    const { errors } = this.state
+    console.log('errors')      
+      if (errors[0] === 'UNIQUE constraint failed: auth_user.username'){
+        return 'El usuario ya existe'
+      }
+    }
 
   render (){
     if (this.state.registered){
       return (
         <View>
-        <Modal style={{backgroundColor: 'yellow', flex:1}} backdropOpacity={0.8} isVisible={this.state.modal}>
-          <View>
-            <Text>Logueate para iniciar sesion</Text>
-            <Button title="OK" onPress={this._toggleModal} />
+        <Modal backdropOpacity={0.9} isVisible={this.state.modal}>
+          <View style={styles.modal}>
+            <Text style={styles.modalText}>Usuario registrado con éxito{"\n"}Logueate para iniciar sesion</Text>
+            <TouchableOpacity style={styles.modalButton} onPress={this._toggleModal}>
+              <Text style={styles.buttonText}>Ir al Login</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
         {this.state.modal ? null : this.props.navigation.navigate("Landing")}
         </View>
       )
     }
+    console.log(this.state.errors)
     return (
       <View style={{ paddingVertical: 20 }}>
       <Card>
@@ -86,9 +98,39 @@ class Signup extends Component {
           title="SIGN UP"
           onPress={this._onSignupPress}
         />
+        <FormValidationMessage>{this.state.errors.length > 0 ? this.renderErrors() : null}</FormValidationMessage>
       </Card>
     </View>
     )
   }
 }
 export default graphql(CREATE_USER)(Signup)
+
+
+const styles = StyleSheet.create({
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2575fc',
+    padding: 20,
+    borderRadius: 20,
+  },
+  modalButton: {
+    borderRadius:50, 
+    width: '100%', 
+    padding: 10, 
+    backgroundColor: 'white',
+  },
+  modalText: {
+    fontSize: 20,
+    color: 'white',
+    paddingBottom: 20,
+  }, 
+  buttonText:{
+    textAlign: 'center',
+    fontSize: 20,
+    color: '#2575fc',
+    fontWeight: 'bold',
+  },
+})
+
