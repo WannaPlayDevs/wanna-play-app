@@ -18,28 +18,28 @@ export default ({ navigation }) => (
     locations={[0.25, 1]} 
     style={styles.container}
   >
-  <View style={styles.logoContainer}>
-    <Image
-        style={styles.logo}
-        source={require('../../assets/images/logo.png')}
-    />
-  </View>
-  <View style={styles.bodyContainer}>
-    <View style={styles.buttonsContainer}>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SignUp")}>
-        <Text style={styles.buttonText}>SIGN UP</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("LogIn")}>
-        <Text style={styles.buttonText}>LOG IN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => Linking.openURL('http://www.google.es')}>
-        <Text style={styles.buttonText}>ABOUT</Text>
-      </TouchableOpacity>
+    <View style={styles.logoContainer}>
+      <Image
+          style={styles.logo}
+          source={require('../../assets/images/logo.png')}
+      />
     </View>
-    <View style={styles.footerContainer}>
-      <Text style={styles.footerText}>WANNA PLAY?</Text>
+    <View style={styles.bodyContainer}>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SignUp")}>
+          <Text style={styles.buttonText}>SIGN UP</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("LogIn")}>
+          <Text style={styles.buttonText}>LOG IN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => Linking.openURL('http://www.google.es')}>
+          <Text style={styles.buttonText}>ABOUT</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.footerContainer}>
+        <Text style={styles.footerText}>WANNA PLAY?</Text>
+      </View>
     </View>
-  </View>
   </LinearGradient>
 )
 
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-      width: 200,
-      height: 200,
+    width: 200,
+    height: 200,
   },
   bodyContainer: {
     flex: 1,
