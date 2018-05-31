@@ -29,11 +29,11 @@ class Perfil extends Component {
     const { me } = this.props.data
     return(
       <View>
-        <Text>{me && me.playFortnite ? 'Fortnite' : null}</Text>
-        <Text>{me && me.playGta ? 'GTA V' : null}</Text>
-        <Text>{me && me.playOverwatch ? 'Overwatch' : null}</Text>
-        <Text>{me && me.playArk ? 'Ark' : null}</Text>
-        <Text>{me && me.playWow ? 'Wow' : null}</Text>
+        {me && me.playFortnite ?<Text>Fortnite</Text>: null}
+        {me && me.playGta ?<Text>GTA V</Text>: null}
+        {me && me.playOverwatch ?<Text>Overwatch</Text>: null}
+        {me && me.playArk ?<Text>Ark</Text>: null}
+        {me && me.playWow ?<Text>Wow</Text>: null}
       </View>
     )
   }
