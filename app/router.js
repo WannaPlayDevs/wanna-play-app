@@ -20,7 +20,7 @@ const headerStyle = {
 
 export const LoggedOut = StackNavigator({
   Landing: {
-    screen: Perfil,
+    screen: Landing,
     navigationOptions: {
       header: null,
     }

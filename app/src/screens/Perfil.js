@@ -25,9 +25,21 @@ const gamesList = [
 
 class Perfil extends Component {
 
+  renderGames(){
+    const { me } = this.props.data
+    return(
+      <View>
+        <Text>{me && me.playFortnite ? 'Fortnite' : null}</Text>
+        <Text>{me && me.playGta ? 'GTA V' : null}</Text>
+        <Text>{me && me.playOverwatch ? 'Overwatch' : null}</Text>
+        <Text>{me && me.playArk ? 'Ark' : null}</Text>
+        <Text>{me && me.playWow ? 'Wow' : null}</Text>
+      </View>
+    )
+  }
+
   render() {
-    const { data } = this.props
-    console.log(data)
+    const { me } = this.props.data
     return (
       <ScrollView>
         <StatusBar hidden={true} />
@@ -37,8 +49,8 @@ class Perfil extends Component {
               style={styles.userAvatar}
               source={require('../../assets/images/default-avatar_800x.jpg')}
             />
-            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Ina Vanilla</Text>
-            <Text>@vanilla_ina</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.username : null}</Text>
+            <Text>@{me ? me.alias : null}</Text>
           </View>
           <View style={styles.userInfo}>
             <View style={styles.section}>
@@ -80,12 +92,13 @@ class Perfil extends Component {
               <Text style={{ color: 'white' }}>S</Text>
             </View>
           </View>
-          <View>
+            {this.renderGames()}
+          {/*<View>
             <FlatList
               data={gamesList}
               renderItem={({item}) => <Text style={{ marginBottom: 15,textAlign: 'center' }}>{item.name}</Text>}
             />
-          </View>
+          </View>*/}
         </View>
       </ScrollView>
     )

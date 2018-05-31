@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, FlatList} from 'react-native';
 import {graphql} from 'react-apollo';
 
-import GET_LINKS from '../graphql/queries/getLinks'
+import GET_MENSAJES from '../graphql/queries/getMensajes'
 import Links from '../components/Links'
 
 class Home extends Component {
@@ -13,7 +13,7 @@ class Home extends Component {
     const { data } = this.props
     return (
       <FlatList
-        data ={data.links}
+        data ={data.mensajes}
         keyExtractor={item => item.id}
         renderItem={this._renderItem}
       />
@@ -21,4 +21,4 @@ class Home extends Component {
   }  
 }
 
-export default graphql(GET_LINKS)(Home)
+export default graphql(GET_MENSAJES)(Home)

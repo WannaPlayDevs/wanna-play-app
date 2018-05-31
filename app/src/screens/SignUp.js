@@ -16,7 +16,7 @@ class Signup extends Component {
   state ={
     username: '',
     password: '',
-    email: '',
+    alias: '',
     registered: false,
     modal: true,
     errors: [],
@@ -27,12 +27,12 @@ class Signup extends Component {
   _toggleModal = () => this.setState({ modal: false });
 
   _onSignupPress = async () => {
-    const { username, password, email } = this.state
+    const { username, password, alias } = this.state
 
     const { data, errors } = await this.props.mutate({
       variables: {
         username,
-        email,
+        alias,
         password,
       }
     }).catch(res => {
@@ -85,11 +85,11 @@ class Signup extends Component {
           placeholder="Password..." 
           onChangeText={text => this._onChangeText(text, 'password')}
         />
-        <FormLabel>Email</FormLabel>
+        <FormLabel>Alias</FormLabel>
         <FormInput 
           secureTextEntry 
           placeholder="Email..." 
-          onChangeText={text => this._onChangeText(text, 'email')}
+          onChangeText={text => this._onChangeText(text, 'alias')}
         />
 
         <Button
