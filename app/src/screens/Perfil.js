@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage } from 'react-native'
 import { graphql } from 'react-apollo'
 
 import ME_QUERY from '../graphql/queries/me'
@@ -25,6 +25,8 @@ const gamesList = [
 
 class Perfil extends Component {
 
+  state={pkid:''}
+
   renderGames(){
     const { me } = this.props.data
     return(
@@ -37,6 +39,13 @@ class Perfil extends Component {
       </View>
     )
   }
+
+  componentWillMount(){
+    if(this.props.data.me){
+    AsyncStorage.setItem('@id', this.props.data.me.pkUser)
+    }
+  }
+
 
   render() {
     const { me } = this.props.data

@@ -13,6 +13,7 @@ import SignUp from './src/screens/SignUp'
 import Home from './src/screens/Home'
 import Profile from './src/screens/Profile'
 import Perfil from './src/screens/Perfil'
+import prueba from './src/screens/prueba'
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -63,7 +64,7 @@ export const LoggedIn = TabNavigator(
       }
     },
     Logout: {
-      screen: Profile,
+      screen: prueba,
       navigationOptions: {
         tabBarLabel: 'Logout',
         tabBarIcon: ({ tintColor }) => (
