@@ -5,6 +5,14 @@ export function login(){
         type: 'LOGIN'
     }
 }
+
+export function getUserInfo(info) {
+  return {
+    type: 'GET_USER_INFO',
+    info
+  }
+}
+
 export function logout() {
     return async (dispatch) => {
       try {

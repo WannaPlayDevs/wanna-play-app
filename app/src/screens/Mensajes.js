@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, AsyncStorage, Text } from 'react-native';
 import { graphql, gql } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import me from '../graphql/queries/me'
 import Mensaje from '../components/Mensaje'
@@ -11,7 +12,6 @@ const value=''
 class Mensajes extends Component {
 
   _renderItem = ({ item }) => <Mensaje mensaje item={item} />
-  
   
   /*getAsync = async () => {
     try {
@@ -31,7 +31,13 @@ class Mensajes extends Component {
 
   render() {
     const { data } = this.props
-    console.log("fk", this.props.fk)
+    console.log('Mensajes', this.props)
+    console.log("fk", this.props)
+
+    if(data.misMensajes && data.misMensajes.length == 0){
+      return <Text>No tienes ningun mensaje!</Text>
+    }
+
     return (
       <FlatList
         style={{ marginTop: 30 }}
@@ -60,9 +66,9 @@ query misMensajes($fkDestinatario: String!) {
 const MensajeWithData = graphql(mensajeQuery, {  
   options: (props)=>({
     variables: {
-      fkDestinatario: props.fk
+      fkDestinatario: props.info.pkUser
     }
   })
 })(Mensajes)
 
-export default MensajeWithData
+export default connect(state => ({info: state.user.info}))(MensajeWithData)

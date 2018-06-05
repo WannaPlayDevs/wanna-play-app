@@ -18,6 +18,8 @@ import Profile from './src/screens/Profile'
 import Perfil from './src/screens/Perfil'
 import prueba from './src/screens/prueba'
 
+import getUserInfo  from './src/actions/user'
+
 import { addListener } from './nav';
 
 import ME from './src/graphql/queries/me'
@@ -48,6 +50,7 @@ export const LoggedOut = StackNavigator({
     }
   }
 })
+// const {info} = this.props.info
 
 export const LoggedIn = TabNavigator(
   {
@@ -61,7 +64,7 @@ export const LoggedIn = TabNavigator(
       }
     },
     Mensajes: {
-      screen: props => <Mensajes {...props} fk="1" /> ,
+      screen: Mensajes ,
       navigationOptions: {
         tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor }) => (
@@ -100,6 +103,7 @@ const AppMainNav = StackNavigator(
 );
 
 class AppNavigator extends Component {
+
   render() {
     const nav = addNavigationHelpers({
       dispatch: this.props.dispatch,
@@ -109,12 +113,12 @@ class AppNavigator extends Component {
     if (!this.props.user.isAuthenticated) {
       return <LoggedOut />;
     }
-    console.log('logeado', this.props)
     return <AppMainNav navigation={nav} />;
   }
 }
 
 export default connect(state => ({
+  info: state.user.info,
   nav: state.nav,
   user: state.user,
 }))(AppNavigator);

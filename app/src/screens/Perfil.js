@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage } from 'react-native'
-import { graphql } from 'react-apollo'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button } from 'react-native'
+import { graphql, compose, withApollo } from 'react-apollo'
+import { connect } from 'react-redux'
+
+import { getUserInfo } from '../actions/user'
+import { logout } from '../actions/user';
 
 import ME_QUERY from '../graphql/queries/me'
 
@@ -24,6 +28,21 @@ const gamesList = [
 ]
 
 class Perfil extends Component {
+
+  _logout = () => {
+    console.log('onlogout', this.props)
+    this.props.client.resetStore()
+    return this.props.logout();
+  }
+
+  componentDidMount() {
+    this._getUserInfo();
+  }
+
+  _getUserInfo = async () => {
+    const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
+    this.props.getUserInfo(me);
+  }
 
   renderGames(){
     const { me } = this.props.data
@@ -100,6 +119,11 @@ class Perfil extends Component {
               renderItem={({item}) => <Text style={{ marginBottom: 15,textAlign: 'center' }}>{item.name}</Text>}
             />
           </View>*/}
+          <Button
+            backgroundColor="#03A9F4"
+            title="LOG OUT"
+            onPress={this._logout}
+          />
         </View>
       </ScrollView>
     )
@@ -131,4 +155,8 @@ const styles = StyleSheet.create({
 
 })
 
-export default graphql(ME_QUERY)(Perfil)
+export default withApollo(compose(
+  connect(undefined, { logout }),
+  connect(undefined, { getUserInfo }),
+  graphql(ME_QUERY)
+)(Perfil))
