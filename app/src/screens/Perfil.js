@@ -46,14 +46,36 @@ class Perfil extends Component {
 
   renderGames(){
     const { me } = this.props.data
+    if(
+      !(me && me.playFortnite) && 
+      !(me && me.playGta) &&
+      !(me && me.playOverwatch) &&
+      !(me && me.playRust) &&
+      !(me && me.playWow) &&
+      !(me && me.playPubg)
+    ){
+      return <Text>No hay juegos que mostrar</Text>
+    }
     return(
       <View>
         {me && me.playFortnite ?<Text>Fortnite</Text>: null}
         {me && me.playGta ?<Text>GTA V</Text>: null}
         {me && me.playOverwatch ?<Text>Overwatch</Text>: null}
-        {me && me.playArk ?<Text>Ark</Text>: null}
+        {me && me.playRust ?<Text>Rust</Text>: null}
         {me && me.playWow ?<Text>Wow</Text>: null}
+        {me && me.playPubg ?<Text>Pubg</Text>: null}
       </View>
+    )
+  }
+
+  renderAvailability(){
+    const { me } = this.props.data
+    return(
+    <View>
+      {me && me.horarioManana ? <Text style={styles.textAvailability}>Mornings</Text> : null}
+      {me && me.horarioNoche ? <Text style={styles.textAvailability}>Evenings</Text> : null}
+      {me && me.horarioTarde ? <Text style={styles.textAvailability}>Afternoons</Text> : null}
+    </View>
     )
   }
 
@@ -69,14 +91,13 @@ class Perfil extends Component {
               style={styles.userAvatar}
               source={require('../../assets/images/default-avatar_800x.jpg')}
             />
-            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.username : null}</Text>
-            <Text>@{me ? me.alias : null}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
+            <Text>@{me ? me.username : null}</Text>
           </View>
           <View style={styles.userInfo}>
             <View style={styles.section}>
               <Text>Availability</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Afternoons</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Evenings</Text>
+              {this.renderAvailability()}
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
@@ -152,6 +173,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
   },
+  textAvailability: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 5
+  }
 
 })
 

@@ -59,9 +59,9 @@ class Signup extends Component {
         <View>
         <Modal backdropOpacity={0.9} isVisible={this.state.modal}>
           <View style={styles.modal}>
-            <Text style={styles.modalText}>Usuario registrado con éxito{"\n"}Logueate para iniciar sesion</Text>
+            <Text style={styles.modalText}>Registration successful{"\n"}You can login now</Text>
             <TouchableOpacity style={styles.modalButton} onPress={this._toggleModal}>
-              <Text style={styles.buttonText}>Ir al Login</Text>
+              <Text style={styles.buttonText}>OK!!</Text>
             </TouchableOpacity>
           </View>
         </Modal>

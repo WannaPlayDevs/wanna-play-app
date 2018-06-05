@@ -14,8 +14,12 @@ export default gql`
 	playGta
 	playOverwatch
     playFortnite
-    playArk
-    playWow
+    playPubg
+	playWow
+	playRust
+	horarioManana
+	horarioTarde
+	horarioNoche
 	}
 }
 `
