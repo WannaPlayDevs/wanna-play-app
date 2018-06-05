@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger'
 import reducers from './reducers';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:8000/graphql/',
+  uri: 'http:localhost:8000/graphql/',
 });
 
 
@@ -19,13 +19,13 @@ networkInterface.use([{
     }
     try {
       const token = await AsyncStorage.getItem('@token');
+      console.log('token de store', token)
       if (token != null) {
         req.options.headers.authorization = `jwt ${token}` || null;
       }
     } catch (error) {
       throw error;
     }
-    console.log(req.options.headers)
     return next();
   }
 }])

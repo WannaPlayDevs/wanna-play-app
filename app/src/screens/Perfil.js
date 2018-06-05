@@ -25,8 +25,6 @@ const gamesList = [
 
 class Perfil extends Component {
 
-  state={pkid:''}
-
   renderGames(){
     const { me } = this.props.data
     return(
@@ -40,15 +38,9 @@ class Perfil extends Component {
     )
   }
 
-  componentWillMount(){
-    if(this.props.data.me){
-    AsyncStorage.setItem('@id', this.props.data.me.pkUser)
-    }
-  }
-
-
   render() {
     const { me } = this.props.data
+    console.log('props desde perfil', this.props)
     return (
       <ScrollView>
         <StatusBar hidden={true} />

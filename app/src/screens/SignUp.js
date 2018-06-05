@@ -9,7 +9,6 @@ import Login from '../screens/LogIn'
 
 import { graphql } from 'react-apollo'
 import CREATE_USER from './../graphql/mutations/signup'
-import { isMutationErrorAction } from "apollo-client/actions";
 
 class Signup extends Component {
 

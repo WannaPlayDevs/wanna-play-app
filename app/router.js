@@ -1,19 +1,26 @@
-import React from 'react'
-import { Platform, StatusBar } from 'react-native'
+import React, { Component } from 'react';
+import { Platform, StatusBar, Text, AsyncStorage } from 'react-native'
 import {
   StackNavigator,
   TabNavigator,
-  SwitchNavigator
+  SwitchNavigator,
+  addNavigationHelpers
 } from 'react-navigation'
 import { FontAwesome } from 'react-native-vector-icons'
+import { graphql, gql } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import Landing from './src/screens/Landing'
 import LogIn from './src/screens/LogIn'
 import SignUp from './src/screens/SignUp'
-import Home from './src/screens/Home'
+import Mensajes from './src/screens/Mensajes'
 import Profile from './src/screens/Profile'
 import Perfil from './src/screens/Perfil'
 import prueba from './src/screens/prueba'
+
+import { addListener } from './nav';
+
+import ME from './src/graphql/queries/me'
 
 const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -44,16 +51,6 @@ export const LoggedOut = StackNavigator({
 
 export const LoggedIn = TabNavigator(
   {
-    Home: {
-      screen: Home,
-      navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name='home' size={30} color={tintColor} />
-        ),
-        headerStyle
-      }
-    },
     Profile: {
       screen: Perfil,
       navigationOptions: {
@@ -63,8 +60,18 @@ export const LoggedIn = TabNavigator(
         )
       }
     },
+    Mensajes: {
+      screen: props => <Mensajes {...props} fk="1" /> ,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name='home' size={30} color={tintColor} />
+        ),
+        headerStyle
+      }
+    },
     Logout: {
-      screen: prueba,
+      screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Logout',
         tabBarIcon: ({ tintColor }) => (
@@ -82,18 +89,34 @@ export const LoggedIn = TabNavigator(
   }
 )
 
-export const createRootNavigator = (loggedIn = false) => {
-  return SwitchNavigator(
-    {
-      LoggedIn: {
-        screen: LoggedIn
-      },
-      LoggedOut: {
-        screen: LoggedOut
-      }
+const AppMainNav = StackNavigator(
+  {
+    Home: {
+      screen: LoggedIn,
+      navigationOptions: ({ navigation }) => ({
+      }),
     },
-    {
-      initialRouteName: loggedIn ? 'LoggedIn' : 'LoggedOut'
+  },
+);
+
+class AppNavigator extends Component {
+  render() {
+    const nav = addNavigationHelpers({
+      dispatch: this.props.dispatch,
+      state: this.props.nav,
+      addListener
+    });
+    if (!this.props.user.isAuthenticated) {
+      return <LoggedOut />;
     }
-  )
+    console.log('logeado', this.props)
+    return <AppMainNav navigation={nav} />;
+  }
 }
+
+export default connect(state => ({
+  nav: state.nav,
+  user: state.user,
+}))(AppNavigator);
+
+export const router = AppMainNav.router;

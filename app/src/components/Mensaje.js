@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity  } from 'react-native';
 
-class Usuario extends Component {
+class Mensaje extends Component {
   render() {
     const {item} = this.props
     return (
@@ -12,8 +12,8 @@ class Usuario extends Component {
             source={require('../../assets/images/default-avatar_800x.jpg')}
           />
           <View style={styles.datos}>
-            <Text style={styles.textName}>{item.username}</Text>
-            <Text>@{item.alias}</Text>
+            <Text style={styles.textName}>{item.asunto}</Text>
+            <Text>{item.cuerpo}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Usuario
+export default Mensaje

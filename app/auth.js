@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+/* import { AsyncStorage } from 'react-native'
 
 export const USER_KEY = '@token'
 
@@ -19,3 +19,4 @@ export const isLoggedIn = () => {
       .catch(err => reject(err))
   })
 }
+*/

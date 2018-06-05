@@ -36,9 +36,8 @@ class Login extends Component {
     console.log(errors)
     try {
       
-      await AsyncStorage.setItem('@token', data.tokenAuth.token)
-      
-      this.props.navigation.navigate("LoggedIn")
+      await AsyncStorage.setItem('@token', data.tokenAuth.token)      
+      return this.props.login()
       
     } catch (error) {
       console.log('this.props.data.error')
@@ -81,4 +80,4 @@ class Login extends Component {
 export default compose(
   graphql(LOGIN_MUTATION),
   connect(undefined, { login }),
-)(Login);
+)(Login)
