@@ -97,6 +97,7 @@ const AppMainNav = StackNavigator(
     Home: {
       screen: LoggedIn,
       navigationOptions: ({ navigation }) => ({
+        header:null
       }),
     },
   },
