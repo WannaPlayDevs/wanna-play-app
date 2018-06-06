@@ -3,6 +3,7 @@ import { Platform, StatusBar, Text, AsyncStorage } from 'react-native'
 import {
   StackNavigator,
   TabNavigator,
+  TabBarBottom,
   SwitchNavigator,
   addNavigationHelpers
 } from 'react-navigation'
@@ -89,7 +90,11 @@ export const LoggedIn = TabNavigator(
       style: {
         // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
       }
-    }
+    },
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    swipeEnabled: false,
   }
 )
 

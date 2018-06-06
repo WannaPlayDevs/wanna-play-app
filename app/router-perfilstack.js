@@ -5,23 +5,19 @@ import { StackNavigator} from 'react-navigation'
 import Perfil from './src/screens/Perfil'
 import PerfilEdit from './src/screens/PerfilEdit'
 
-const headerStyle = {
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
-}
 
 const PerfilStack = StackNavigator(
     {
       Main: {
         screen: Perfil,
         navigationOptions: {
-            header: null,
+            title: "Welcome",
         }
       },
       Edit: {
         screen: PerfilEdit,
         navigationOptions: {
           title: "Edit",
-          headerStyle
         }
       }
     }
