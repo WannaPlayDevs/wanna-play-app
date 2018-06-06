@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Platform, StatusBar, Text, AsyncStorage } from 'react-native'
 import {
   StackNavigator,
@@ -14,8 +14,8 @@ import Landing from './src/screens/Landing'
 import LogIn from './src/screens/LogIn'
 import SignUp from './src/screens/SignUp'
 import Mensajes from './src/screens/Mensajes'
-import Profile from './src/screens/Profile'
-import Perfil from './src/screens/Perfil'
+import Search from './src/screens/Search'
+import PerfilStack from './router-perfilstack'
 import prueba from './src/screens/prueba'
 
 import getUserInfo  from './src/actions/user'
@@ -28,34 +28,36 @@ const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
 }
 
-export const LoggedOut = StackNavigator({
-  Landing: {
-    screen: Landing,
-    navigationOptions: {
-      header: null,
-    }
-  },
-  LogIn: {
-    screen: LogIn,
-    navigationOptions: {
-      title: "Log In",
-      headerStyle
-    }
-  },
-  SignUp: {
-    screen: SignUp,
-    navigationOptions: {
-      title: "Sign Up",
-      headerStyle
+export const LoggedOut = StackNavigator(
+  {
+    Landing: {
+      screen: Landing,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    LogIn: {
+      screen: LogIn,
+      navigationOptions: {
+        title: "Log In",
+        headerStyle
+      }
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions: {
+        title: "Sign Up",
+        headerStyle
+      }
     }
   }
-})
+)
 // const {info} = this.props.info
 
 export const LoggedIn = TabNavigator(
   {
     Profile: {
-      screen: Perfil,
+      screen: PerfilStack,
       navigationOptions: {
         tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor }) => (
@@ -63,22 +65,21 @@ export const LoggedIn = TabNavigator(
         )
       }
     },
-    Mensajes: {
-      screen: Mensajes ,
+    Messages: {
+      screen: Mensajes,
       navigationOptions: {
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Messages',
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name='home' size={30} color={tintColor} />
+          <FontAwesome name='envelope' size={30} color={tintColor} />
         ),
-        headerStyle
       }
     },
-    Logout: {
-      screen: Profile,
+    Search: {
+      screen: Search,
       navigationOptions: {
-        tabBarLabel: 'Logout',
+        tabBarLabel: 'Search',
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name='user' size={30} color={tintColor} />
+          <FontAwesome name='search' size={30} color={tintColor} />
         )
       }
     }

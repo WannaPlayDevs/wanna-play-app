@@ -7,10 +7,7 @@ class Usuario extends Component {
     return (
       <TouchableOpacity onPress={() => console.log('pulsado')}>
         <View style={styles.container}>
-          <Image
-            style={styles.userAvatar}
-            source={require('../../assets/images/default-avatar_800x.jpg')}
-          />
+          <Text style={styles.userAvatar}></Text>
           <View style={styles.datos}>
             <Text style={styles.textName}>{item.username}</Text>
             <Text>@{item.alias}</Text>

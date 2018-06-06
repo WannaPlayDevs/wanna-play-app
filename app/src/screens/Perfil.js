@@ -82,15 +82,15 @@ class Perfil extends Component {
   render() {
     const { me } = this.props.data
     console.log('props desde perfil', this.props)
+    const { navigate } = this.props.navigation
     return (
       <ScrollView>
         <StatusBar hidden={true} />
         <View style={{ alignItems: 'center' }}>
           <View style={styles.userAvatarContainer}>
-            <Image
-              style={styles.userAvatar}
-              source={require('../../assets/images/default-avatar_800x.jpg')}
-            />
+            <View style={styles.userAvatar}>
+              <Text style={{ fontSize: 28 }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
+            </View>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
             <Text>@{me ? me.username : null}</Text>
           </View>
@@ -145,6 +145,14 @@ class Perfil extends Component {
             title="LOG OUT"
             onPress={this._logout}
           />
+          <Button
+            onPress={() => {
+              console.log(this.state)
+              this.props.navigation.navigate("Edit", { alias: me.alias })
+            }}
+            title="Edit Profile"
+            color="blue"
+          />
         </View>
       </ScrollView>
     )
@@ -159,9 +167,13 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   userAvatar: {
+    borderWidth: 2,
+    borderRadius: 50,
+    padding: 20,
     width: 100,
     height: 100,
-    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   userInfo: {
     flexDirection: 'row',

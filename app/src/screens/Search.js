@@ -6,7 +6,7 @@ import { withApollo } from 'react-apollo';
 
 import { logout } from '../actions/user';
 
-class Profile extends Component{
+class Search extends Component{
 
   _logout = () => {
     console.log('onlogout', this.props)
@@ -44,5 +44,5 @@ class Profile extends Component{
   }
 }
 // export default connect(undefined, { logout })(Profile)
-export default withApollo(connect(undefined, { logout })(Profile));
+export default withApollo(connect(undefined, { logout })(Search));
 
