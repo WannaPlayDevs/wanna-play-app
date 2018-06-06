@@ -148,7 +148,7 @@ class Perfil extends Component {
           <Button
             onPress={() => {
               console.log(this.state)
-              this.props.navigation.navigate("Edit", { alias: me.alias })
+              this.props.navigation.navigate("Edit", { objeto: me })
             }}
             title="Edit Profile"
             color="blue"

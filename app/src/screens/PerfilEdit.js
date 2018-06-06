@@ -11,13 +11,16 @@ class PerfilEdit extends Component {
   }
 
   render() {
+    const data = this.props.navigation.getParam('objeto', 'Oh oh, no hay alias...')
     return (
       <View>
         <TextInput
           onChangeText={(text) => this.setState({alias: text})}
           value={this.state.alias}
         />
-        <Text>Prop desde perfil: {this.props.navigation.getParam('alias', 'Oh oh, no hay alias...')}</Text>
+        <Text>Prop desde perfil - alias: {data.alias}</Text>
+        <Text>Prop desde perfil - pkuser : {data.pkUser}</Text>
+        <Text>Prop desde perfil - username : {data.username}</Text>
         <Button
           onPress={() => {
             console.log(this.state)
