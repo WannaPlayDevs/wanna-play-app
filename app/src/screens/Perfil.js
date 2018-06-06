@@ -37,11 +37,23 @@ class Perfil extends Component {
 
   componentDidMount() {
     this._getUserInfo();
+    this._getRefesh();
   }
+
 
   _getUserInfo = async () => {
     const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
     this.props.getUserInfo(me);
+  }
+
+  _sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  _getRefesh = async () => {
+    this.props.data.startPolling(100)
+    await this._sleep(1000);
+    this.props.data.stopPolling()
   }
 
   renderGames(){
@@ -81,7 +93,6 @@ class Perfil extends Component {
 
   render() {
     const { me } = this.props.data
-    console.log('props desde perfil', this.props)
     const { navigate } = this.props.navigation
     return (
       <ScrollView>
@@ -134,12 +145,6 @@ class Perfil extends Component {
             </View>
           </View>
             {this.renderGames()}
-          {/*<View>
-            <FlatList
-              data={gamesList}
-              renderItem={({item}) => <Text style={{ marginBottom: 15,textAlign: 'center' }}>{item.name}</Text>}
-            />
-          </View>*/}
           <Button
             backgroundColor="#03A9F4"
             title="LOG OUT"
@@ -148,7 +153,7 @@ class Perfil extends Component {
           <Button
             onPress={() => {
               console.log(this.state)
-              this.props.navigation.navigate("Edit", { alias: me.alias })
+              this.props.navigation.navigate("Edit", { data: me })
             }}
             title="Edit Profile"
             color="blue"
