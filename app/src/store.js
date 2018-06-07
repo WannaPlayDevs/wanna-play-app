@@ -8,7 +8,8 @@ import { createLogger } from 'redux-logger'
 import reducers from './reducers';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://b167e781.ngrok.io/graphql/',
+  // uri: 'http://77cbe928.ngrok.io/graphql/',
+  uri: 'http://localhost:8000/graphql/',
 });
 
 

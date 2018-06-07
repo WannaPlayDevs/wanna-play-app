@@ -1,11 +1,93 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity  } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput  } from 'react-native';
+import Modal from "react-native-modal";
+
+import { graphql } from 'react-apollo'
+import RESPONSE_MESSAGE from './../graphql/mutations/responseMessage'
+
 
 class Mensaje extends Component {
+
+  state = {
+    modal: false,
+    asunto: '',
+    cuerpo: ''
+  }
+
+  _toggleModal = () => this.setState({ modal: !this.state.modal });
+  _onChangeText = (text, type) => this.setState({ [type]: text })
+
+  _responseMessage = async () => {
+    const { asunto, cuerpo } = this.state
+
+    const { data, errors } = await this.props.mutate({
+      variables: {
+        fkDestinatario: this.props.item.fkRemitente.pkUser,
+        fkRemitente: this.props.item.fkDestinatario.pkUser,
+        asunto,
+        cuerpo
+      }
+    })
+    try {
+      this._toggleModal()
+    } catch (error) {
+      throw error
+    }
+  }
+
   render() {
     const {item} = this.props
+    console.log('item', item)
+
+    if(this.state.modal){
+      return(
+        <View>
+        <Modal backdropOpacity={1} backdropColor={'white'} isVisible={this.state.modal} s>
+          <View style={{height: '100%', width: '100%', alignItems: 'center',}}>
+          <View
+          style={{
+            backgroundColor: "#bcbec1",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 60,
+            height: 60,
+            borderRadius: 30,
+            alignSelf: "center",
+            marginBottom: 20
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 28 }}>{item.fkRemitente.alias.charAt(0).toUpperCase()}</Text>
+        </View>
+        <Text>{item.fkRemitente.alias}</Text>
+        <Text>{item.asunto}</Text>
+        <Text>{item.cuerpo}</Text>
+
+        <TextInput 
+          placeholder='Asunto'
+          onChangeText={text => this._onChangeText(text, 'asunto')}  
+        />
+
+        <TextInput 
+          placeholder='Cuerpo'
+          onChangeText={text => this._onChangeText(text, 'cuerpo')}
+          multiline={true}
+          numberOfLines={10}
+        />
+
+        <TouchableOpacity onPress={this._toggleModal}>
+          <Text>Cancelar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this._responseMessage}>
+          <Text>Responder</Text>
+        </TouchableOpacity>
+          </View>
+        </Modal>
+        </View>
+      )
+    }
+
     return (
-      <TouchableOpacity onPress={() => console.log('pulsado')}>
+      <TouchableOpacity onPress={this._toggleModal}>
         <View style={styles.container}>
           <Image
             style={styles.userAvatar}
@@ -44,4 +126,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Mensaje
+export default graphql(RESPONSE_MESSAGE)(Mensaje)

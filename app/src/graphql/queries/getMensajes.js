@@ -6,8 +6,13 @@ query misMensajes($fkDestinatario: String!) {
     cuerpo
     asunto
     fkRemitente{
+      pkUser
       username
       alias
+    }
+    fkDestinatario{
+      pkUser
+      username
     }
   }
 }

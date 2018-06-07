@@ -18,6 +18,7 @@ import Mensajes from './src/screens/Mensajes'
 import Search from './src/screens/Search'
 import PerfilStack from './router-perfilstack'
 import prueba from './src/screens/prueba'
+import Users from './src/screens/Users'
 
 import getUserInfo  from './src/actions/user'
 
@@ -76,7 +77,7 @@ export const LoggedIn = TabNavigator(
       }
     },
     Search: {
-      screen: Search,
+      screen: Users,
       navigationOptions: {
         tabBarLabel: 'Search',
         tabBarIcon: ({ tintColor }) => (

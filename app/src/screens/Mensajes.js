@@ -27,7 +27,6 @@ class Mensajes extends Component {
         renderItem={this._renderItem}
       />
   }*/
-  _keyExtractor = (item, index) => item.id;
 
   render() {
     const { data } = this.props
@@ -57,8 +56,12 @@ query misMensajes($fkDestinatario: String!) {
     cuerpo
     asunto
     fkRemitente{
+      pkUser
       username
       alias
+    }
+    fkDestinatario{
+      pkUser
     }
   }
 }
