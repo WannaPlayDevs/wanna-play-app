@@ -16,7 +16,6 @@ class PerfilEdit extends Component {
   _onUpdate = async () => {
     const { alias } = this.state
     const me = this.props.navigation.getParam('data', '!ops!')
-    const pkUser = me.pkUser
 
     const { data, errors } = await this.props.mutate({
       variables: {
@@ -39,9 +38,9 @@ class PerfilEdit extends Component {
           onChangeText={(text) => this.setState({alias: text})}
           value={this.state.alias}
         />
-        <Text>Prop desde perfil - alias: {data.alias}</Text>
-        <Text>Prop desde perfil - pkuser : {data.pkUser}</Text>
-        <Text>Prop desde perfil - username : {data.username}</Text>
+        <Text>Prop desde perfil - alias: {me.alias}</Text>
+        <Text>Prop desde perfil - pkuser : {me.pkUser}</Text>
+        <Text>Prop desde perfil - username : {me.username}</Text>
         <Button
           onPress={this._onUpdate}
           title="Save"
