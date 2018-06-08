@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, TextInput, Button } from 'react-native'
+import { Text, View, FlatList, TextInput, Button, TouchableOpacity } from 'react-native'
 import { graphql } from 'react-apollo'
 import { CheckBox } from 'react-native-elements'
  
@@ -20,7 +20,13 @@ class Users extends Component {
     noche: false
   }
 
-  _renderItem = ({ item }) => <Text>{item.alias}</Text>
+  _renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => this.props.navigation.navigate("UserDetail", { data: item })}>
+        <Text>{item.alias}</Text>
+      </TouchableOpacity>
+    )
+  }
 
   render() {
     const { data } = this.props
