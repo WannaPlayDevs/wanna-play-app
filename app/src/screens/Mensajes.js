@@ -21,7 +21,7 @@ class Mensajes extends Component {
 
     return (
       <FlatList
-        style={{ marginTop: 30 }}
+        style={{ marginTop: 10 }}
         data={data.misMensajes}
         keyExtractor={item => item.pkMensaje}
         renderItem={this._renderItem}

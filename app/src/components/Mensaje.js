@@ -89,13 +89,24 @@ class Mensaje extends Component {
     return (
       <TouchableOpacity onPress={this._toggleModal}>
         <View style={styles.container}>
-          <Image
-            style={styles.userAvatar}
-            source={require('../../assets/images/default-avatar_800x.jpg')}
-          />
+        <View
+        style={{
+          backgroundColor: "#bcbec1",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          alignSelf: "center",
+          marginRight: 10
+        }}
+      >
+        <Text style={{ color: "white", fontSize: 28 }}>{item.fkRemitente.alias.charAt(0).toUpperCase()}</Text>
+      </View>
           <View style={styles.datos}>
-            <Text style={styles.textName}>{item.asunto}</Text>
-            <Text>{item.cuerpo}</Text>
+            <Text style={styles.textName}>{item.fkRemitente.alias}</Text>
+            <Text style={styles.asunto}>{item.asunto}</Text>
+            <Text style={styles.body}>{item.cuerpo}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -122,7 +133,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   textName: {
-    fontSize: 20,
+    fontSize: 22,
+  }, 
+  body: {
+    fontSize: 11,
+    color: 'grey'
+  },
+  asunto: {
+    fontSize: 14
   }
 })
 
