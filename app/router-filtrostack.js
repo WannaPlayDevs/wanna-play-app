@@ -11,7 +11,7 @@ const FiltroStack = StackNavigator(
       Main: {
         screen: FiltroUsuarios,
         navigationOptions: {
-            title: "Search players",
+          header: null,
         }
       },
       UserDetail: {

@@ -11,7 +11,7 @@ const PerfilStack = StackNavigator(
       Main: {
         screen: Perfil,
         navigationOptions: {
-            title: "Welcome",
+          header: null,
         }
       },
       Edit: {

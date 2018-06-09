@@ -15,6 +15,13 @@ class PerfilDetalle extends Component {
     cuerpo: ''
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const username = navigation.getParam('data', 'Error')
+    return {
+      title: username.alias,
+    }
+  }
+
   _toggleModal = () => this.setState({ modal: !this.state.modal });
   _onChangeText = (text, type) => this.setState({ [type]: text })
 
@@ -50,7 +57,7 @@ class PerfilDetalle extends Component {
       return <Text>No hay juegos que mostrar</Text>
     }
     return(
-      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap'}}>
+      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
       <Image
         style={me && me.playWow ? styles.selectedGames : styles.unselectedGames}
         source={require('../../assets/images/wow.png')}
