@@ -10,25 +10,6 @@ import { logout } from '../actions/user';
 import ME_QUERY from '../graphql/queries/me'
 import Games from '../components/Games'
 
-const gamesList = [
-  {
-    "id": 1,
-    "name": "Counter Strike",
-  },
-  {
-    "id": 2,
-    "name": "Overwatch",
-  },
-  {
-    "id": 3,
-    "name": "The Sims 3",
-  },
-  {
-    "id": 4,
-    "name": "Grand Theft Auto V",
-  },
-]
-
 class Perfil extends Component {
 
   _logout = () => {
@@ -69,13 +50,31 @@ class Perfil extends Component {
       return <Text>No hay juegos que mostrar</Text>
     }
     return(
-      <View style={{width: '100%'}}>
-        {me && me.playFortnite ?<Text>Fortnite</Text>: null}
-        {me && me.playGta ?<Text>GTA V</Text>: null}
-        {me && me.playOverwatch ?<Text>Overwatch</Text>: null}
-        {me && me.playRust ?<Text>Rust</Text>: null}
-        {me && me.playWow ?<Games name="Wow" imagen="wow.png" />: null}
-        {me && me.playPubg ?<Text>Pubg</Text>: null}
+      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap'}}>
+      <Image
+        style={me && me.playWow ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/wow.png')}
+      />
+      <Image
+        style={me && me.playFortnite ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/fortnite.png')}
+      />
+      <Image
+        style={me && me.playGta ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/gta.png')}
+      />
+      <Image
+        style={me && me.playOverwatch ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/over.png')}
+      />
+      <Image
+        style={me && me.playRust ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/rust.png')}
+      />
+      <Image
+        style={me && me.playPubg ? styles.selectedGames : styles.unselectedGames}
+        source={require('../../assets/images/pubg.png')}
+      />
       </View>
     )
   }
@@ -103,6 +102,16 @@ class Perfil extends Component {
             <View style={styles.userAvatar}>
               <Text style={{ fontSize: 28 }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
             </View>
+            <TouchableOpacity
+            onPress={() => {
+              console.log(this.state)
+              this.props.navigation.navigate("Edit", { data: me })
+            }}
+            title="Edit Profile"
+            color="blue"
+          >
+            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
+          </TouchableOpacity>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
             <Text>@{me ? me.username : null}</Text>
           </View>
@@ -122,46 +131,12 @@ class Perfil extends Component {
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Spanish</Text>
             </View>
           </View>
-          {/*<View style={{ flexDirection: 'row', marginVertical: 25 }}>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>M</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>T</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>W</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>T</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>F</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>S</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>S</Text>
-            </View>
-    </View>*/}
             {this.renderGames()}
           <Button
             backgroundColor="#03A9F4"
             title="LOG OUT"
             onPress={this._logout}
           />
-          <TouchableOpacity
-            onPress={() => {
-              console.log(this.state)
-              this.props.navigation.navigate("Edit", { data: me })
-            }}
-            title="Edit Profile"
-            color="blue"
-          >
-            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
-          </TouchableOpacity>
-
         </View>
       </ScrollView>
     )
@@ -175,14 +150,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
   },
-  userAvatar: {
-    borderWidth: 2,
-    borderRadius: 50,
-    padding: 20,
+  selectedGames: {
     width: 100,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 139,
+    borderRadius: 10,
+    marginRight: 20,
+    resizeMode: 'stretch',
+    margin: 5,
+    opacity: 1
+  },
+  unselectedGames: {
+    width: 100,
+    height: 139,
+    borderRadius: 10,
+    marginRight: 20,
+    resizeMode: 'stretch',
+    margin: 5,
+    opacity: 0.3
   },
   userInfo: {
     flexDirection: 'row',
