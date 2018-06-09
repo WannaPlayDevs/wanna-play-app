@@ -6,27 +6,9 @@ import { connect } from 'react-redux';
 import me from '../graphql/queries/me'
 import Mensaje from '../components/Mensaje'
 
-const value=''
-
-// console.log(pepe)
 class Mensajes extends Component {
-
-  _renderItem = ({ item }) => <Mensaje mensaje item={item} />
   
-  /*getAsync = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@id');
-    } catch (error) {
-      throw error
-    }
-
-    <FlatList
-        style={{ marginTop: 30 }}
-        data={data.users}
-        keyExtractor={item => item.id}
-        renderItem={this._renderItem}
-      />
-  }*/
+  _renderItem = ({ item }) => <Mensaje mensaje item={item} />
 
   render() {
     const { data } = this.props
@@ -47,8 +29,6 @@ class Mensajes extends Component {
     )
   }
 }
-
-// const fkDestinatario = this.state.fkDestinatario
 
 const mensajeQuery = gql`
 query misMensajes($fkDestinatario: String!) {

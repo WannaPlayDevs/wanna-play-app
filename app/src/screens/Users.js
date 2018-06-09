@@ -138,5 +138,5 @@ export default graphql(FILTER_USER, {
         horarioTarde: false,
         horarioNoche: false
       }
-    }
-  })(Users)
+  }
+})(Users)

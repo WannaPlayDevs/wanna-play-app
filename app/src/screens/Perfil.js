@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button, TouchableOpacity } from 'react-native'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
+import { FontAwesome } from 'react-native-vector-icons'
 
 import { getUserInfo } from '../actions/user'
 import { logout } from '../actions/user';
 
 import ME_QUERY from '../graphql/queries/me'
+import Games from '../components/Games'
 
 const gamesList = [
   {
@@ -36,10 +38,8 @@ class Perfil extends Component {
   }
 
   componentDidMount() {
-    this._getUserInfo();
     this._getRefesh();
   }
-
 
   _getUserInfo = async () => {
     const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
@@ -69,12 +69,12 @@ class Perfil extends Component {
       return <Text>No hay juegos que mostrar</Text>
     }
     return(
-      <View>
+      <View style={{width: '100%'}}>
         {me && me.playFortnite ?<Text>Fortnite</Text>: null}
         {me && me.playGta ?<Text>GTA V</Text>: null}
         {me && me.playOverwatch ?<Text>Overwatch</Text>: null}
         {me && me.playRust ?<Text>Rust</Text>: null}
-        {me && me.playWow ?<Text>Wow</Text>: null}
+        {me && me.playWow ?<Games name="Wow" imagen="wow.png" />: null}
         {me && me.playPubg ?<Text>Pubg</Text>: null}
       </View>
     )
@@ -94,6 +94,7 @@ class Perfil extends Component {
   render() {
     const { me } = this.props.data
     const { navigate } = this.props.navigation
+    this._getUserInfo();
     return (
       <ScrollView>
         <StatusBar hidden={true} />
@@ -121,7 +122,7 @@ class Perfil extends Component {
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Spanish</Text>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginVertical: 25 }}>
+          {/*<View style={{ flexDirection: 'row', marginVertical: 25 }}>
             <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
               <Text style={{ color: 'white' }}>M</Text>
             </View>
@@ -143,21 +144,24 @@ class Perfil extends Component {
             <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
               <Text style={{ color: 'white' }}>S</Text>
             </View>
-          </View>
+    </View>*/}
             {this.renderGames()}
           <Button
             backgroundColor="#03A9F4"
             title="LOG OUT"
             onPress={this._logout}
           />
-          <Button
+          <TouchableOpacity
             onPress={() => {
               console.log(this.state)
               this.props.navigation.navigate("Edit", { data: me })
             }}
             title="Edit Profile"
             color="blue"
-          />
+          >
+            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
+          </TouchableOpacity>
+
         </View>
       </ScrollView>
     )
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 10,
   },
   userAvatar: {
     borderWidth: 2,

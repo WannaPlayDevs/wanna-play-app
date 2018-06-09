@@ -1,63 +1,44 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button, TouchableOpacity, TextInput } from 'react-native'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
+import { FontAwesome } from 'react-native-vector-icons'
+import Modal from "react-native-modal";
 
-import { getUserInfo } from '../actions/user'
-import { logout } from '../actions/user';
+import RESPONSE_MESSAGE from './../graphql/mutations/responseMessage'
 
-import ME_QUERY from '../graphql/queries/me'
+class PerfilDetalle extends Component {
 
-const gamesList = [
-  {
-    "id": 1,
-    "name": "Counter Strike",
-  },
-  {
-    "id": 2,
-    "name": "Overwatch",
-  },
-  {
-    "id": 3,
-    "name": "The Sims 3",
-  },
-  {
-    "id": 4,
-    "name": "Grand Theft Auto V",
-  },
-]
-
-class Perfil extends Component {
-
-  _logout = () => {
-    console.log('onlogout', this.props)
-    this.props.client.resetStore()
-    return this.props.logout();
+  state = {
+    modal: false,
+    asunto: '',
+    cuerpo: ''
   }
 
-  componentDidMount() {
-    this._getUserInfo();
-    this._getRefesh();
-  }
+  _toggleModal = () => this.setState({ modal: !this.state.modal });
+  _onChangeText = (text, type) => this.setState({ [type]: text })
 
+  _responseMessage = async () => {
+    const { asunto, cuerpo } = this.state
+    const me = this.props.navigation.getParam('data', '!ops!')
 
-  _getUserInfo = async () => {
-    const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
-    this.props.getUserInfo(me);
-  }
-
-  _sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  
-  _getRefesh = async () => {
-    this.props.data.startPolling(100)
-    await this._sleep(1000);
-    this.props.data.stopPolling()
+    const { data, errors } = await this.props.mutate({
+      variables: {
+        fkDestinatario: me.pkUser,
+        fkRemitente: this.props.info.pkUser,
+        asunto,
+        cuerpo
+      }
+    })
+    try {
+      this._toggleModal()
+    } catch (error) {
+      throw error
+    }
   }
 
   renderGames(){
-    const { me } = this.props.data
+    const me = this.props.navigation.getParam('data', '!ops!')
     if(
       !(me && me.playFortnite) && 
       !(me && me.playGta) &&
@@ -81,7 +62,7 @@ class Perfil extends Component {
   }
 
   renderAvailability(){
-    const { me } = this.props.data
+    const me = this.props.navigation.getParam('data', '!ops!')
     return(
     <View>
       {me && me.horarioManana ? <Text style={styles.textAvailability}>Mornings</Text> : null}
@@ -92,8 +73,37 @@ class Perfil extends Component {
   }
 
   render() {
-    const { me } = this.props.data
+    const me = this.props.navigation.getParam('data', '!ops!')
     const { navigate } = this.props.navigation
+    console.log('perfil detalle ', this.props)
+
+    if(this.state.modal){
+      return(
+        <View>
+          <Modal backdropOpacity={1} backdropColor={'white'} isVisible={this.state.modal} s>
+            <View style={{height: '100%', width: '100%', alignItems: 'center',}}>
+              <TextInput 
+                placeholder='Asunto'
+                onChangeText={text => this._onChangeText(text, 'asunto')}  
+              />
+              <TextInput 
+                placeholder='Cuerpo'
+                onChangeText={text => this._onChangeText(text, 'cuerpo')}
+                multiline={true}
+                numberOfLines={10}
+              />
+              <TouchableOpacity onPress={this._toggleModal}>
+                <Text>Cancelar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this._responseMessage}>
+                <Text>Responder</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        </View>
+      )
+    }
+
     return (
       <ScrollView>
         <StatusBar hidden={true} />
@@ -110,10 +120,9 @@ class Perfil extends Component {
               <Text>Availability</Text>
               {this.renderAvailability()}
             </View>
-            <View style={styles.section}>
-              <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>23</Text>
-            </View>
+            <TouchableOpacity style={styles.section} onPress={this._toggleModal}>
+              <FontAwesome name="envelope" color={'#03A9F4'} size={30}/>
+            </TouchableOpacity>
             <View style={styles.section}>
               <Text>Language</Text>
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Polski</Text>
@@ -121,43 +130,7 @@ class Perfil extends Component {
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Spanish</Text>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginVertical: 25 }}>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>M</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>T</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>W</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>T</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>F</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30 }}>
-              <Text style={{ textAlign: 'center' }}>S</Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', backgroundColor: 'pink', borderRadius: 50, marginHorizontal: 5, width: 30, height: 30 }}>
-              <Text style={{ color: 'white' }}>S</Text>
-            </View>
-          </View>
             {this.renderGames()}
-          <Button
-            backgroundColor="#03A9F4"
-            title="LOG OUT"
-            onPress={this._logout}
-          />
-          <Button
-            onPress={() => {
-              console.log(this.state)
-              this.props.navigation.navigate("Edit", { data: me })
-            }}
-            title="Edit Profile"
-            color="blue"
-          />
         </View>
       </ScrollView>
     )
@@ -198,8 +171,7 @@ const styles = StyleSheet.create({
 
 })
 
-export default withApollo(compose(
-  connect(undefined, { logout }),
-  connect(undefined, { getUserInfo }),
-  graphql(ME_QUERY)
-)(Perfil))
+export default (compose(
+  connect(state => ({info: state.user.info})),
+  graphql(RESPONSE_MESSAGE))
+)(PerfilDetalle)
