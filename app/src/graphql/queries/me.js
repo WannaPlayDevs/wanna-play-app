@@ -8,9 +8,7 @@ export default gql`
 	alias
 	karma
 	steamName
-	steamName
 	bnetName
-	horarioManana
 	playGta
 	playOverwatch
     playFortnite
