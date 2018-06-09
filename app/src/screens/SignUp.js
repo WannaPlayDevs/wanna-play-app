@@ -76,6 +76,7 @@ class Signup extends Component {
         <FormLabel>User Name</FormLabel>
         <FormInput 
           placeholder="User name..." 
+          autoCapitalize="none"
           onChangeText={text => this._onChangeText(text, 'username')}
         />
         <FormLabel>Password</FormLabel>
@@ -86,8 +87,8 @@ class Signup extends Component {
         />
         <FormLabel>Alias</FormLabel>
         <FormInput 
-          secureTextEntry 
-          placeholder="Email..." 
+          placeholder="Alias..."
+          autoCapitalize="words"
           onChangeText={text => this._onChangeText(text, 'alias')}
         />
 
