@@ -135,7 +135,7 @@ class PerfilDetalle extends Component {
         <View style={{ alignItems: 'center' }}>
           <View style={styles.userAvatarContainer}>
             <View style={styles.userAvatar}>
-              <Text style={{ fontSize: 28 }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
+              <Text style={{ fontSize: 40, fontWeight: 'bold', color: 'white' }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
             </View>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
             <Text>@{me ? me.username : null}</Text>
@@ -150,9 +150,7 @@ class PerfilDetalle extends Component {
             </TouchableOpacity>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Polski</Text>
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Spanish</Text>
             </View>
           </View>
             {this.renderGames()}
@@ -167,16 +165,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 10,
   },
   userAvatar: {
-    borderWidth: 2,
-    borderRadius: 50,
-    padding: 20,
+    backgroundColor: "#bcbec1",
+    alignItems: "center",
+    justifyContent: "center",
     width: 100,
     height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 50,
+    alignSelf: "center",
   },
   selectedGames: {
     width: 100,

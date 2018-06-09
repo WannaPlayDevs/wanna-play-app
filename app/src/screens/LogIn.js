@@ -54,7 +54,8 @@ class Login extends Component {
         <Card>
           <FormLabel>User</FormLabel>
           <FormInput 
-            placeholder="User name..." 
+            placeholder="User name..."
+            autoCapitalize="none"
             onChangeText={text => this._onChangeText(text, 'username')}
           />
           <FormLabel>Password</FormLabel>

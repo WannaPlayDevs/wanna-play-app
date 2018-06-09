@@ -99,15 +99,15 @@ class Perfil extends Component {
         <View style={{ alignItems: 'center' }}>
           <View style={styles.userAvatarContainer}>
             <View style={styles.userAvatar}>
-              <Text style={{ fontSize: 28 }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
+              <Text style={{ fontSize: 40, fontWeight: 'bold', color: 'white' }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
             </View>
             <TouchableOpacity
-            onPress={() => {
-              console.log(this.state)
-              this.props.navigation.navigate("Edit", { data: me })
-            }}
-            title="Edit Profile"
-            color="blue"
+              onPress={() => {
+                console.log(this.state)
+                this.props.navigation.navigate("Edit", { data: me })
+              }}
+              title="Edit Profile"
+              color="blue"
           >
             <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
           </TouchableOpacity>
@@ -125,9 +125,7 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Polski</Text>
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>Spanish</Text>
             </View>
           </View>
             {this.renderGames()}
@@ -183,13 +181,14 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   userAvatar: {
-    borderWidth: 2,
-    borderRadius: 50,
-    padding: 20,
+    backgroundColor: "#bcbec1",
+    alignItems: "center",
+    justifyContent: "center",
     width: 100,
     height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 50,
+    alignSelf: "center",
+    marginRight: 10
   },
 })
 
