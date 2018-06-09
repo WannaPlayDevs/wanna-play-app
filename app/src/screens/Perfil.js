@@ -8,7 +8,6 @@ import { getUserInfo } from '../actions/user'
 import { logout } from '../actions/user';
 
 import ME_QUERY from '../graphql/queries/me'
-import Games from '../components/Games'
 
 class Perfil extends Component {
 
@@ -182,8 +181,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: 5
-  }
-
+  },
+  userAvatar: {
+    borderWidth: 2,
+    borderRadius: 50,
+    padding: 20,
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 })
 
 export default withApollo(compose(
