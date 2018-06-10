@@ -50,31 +50,31 @@ class Perfil extends Component {
       return <Text>No hay juegos que mostrar</Text>
     }
     return(
-      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap'}}>
-      <Image
-        style={me && me.playWow ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/wow.png')}
-      />
-      <Image
-        style={me && me.playFortnite ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/fortnite.png')}
-      />
-      <Image
-        style={me && me.playGta ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/gta.png')}
-      />
-      <Image
-        style={me && me.playOverwatch ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/over.png')}
-      />
-      <Image
-        style={me && me.playRust ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/rust.png')}
-      />
-      <Image
-        style={me && me.playPubg ? styles.selectedGames : styles.unselectedGames}
-        source={require('../../assets/images/pubg.png')}
-      />
+      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
+        <Image
+          style={me && me.playWow ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/wow.png')}
+        />
+        <Image
+          style={me && me.playFortnite ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/fortnite.png')}
+        />
+        <Image
+          style={me && me.playGta ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/gta.png')}
+        />
+        <Image
+          style={me && me.playOverwatch ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/over.png')}
+        />
+        <Image
+          style={me && me.playRust ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/rust.png')}
+        />
+        <Image
+          style={me && me.playPubg ? styles.selectedGames : styles.unselectedGames}
+          source={require('../../assets/images/pubg.png')}
+        />
       </View>
     )
   }

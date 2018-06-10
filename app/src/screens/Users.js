@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList, TextInput, Button, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import { graphql } from 'react-apollo'
-import { CheckBox, Card } from 'react-native-elements'
+import { CheckBox, Card, Divider } from 'react-native-elements'
  
 import FILTER_USER from '../graphql/queries/filterUser'
  
@@ -47,14 +47,20 @@ class Users extends Component {
     console.log('state user', this.state)
 
     return (
-      <ScrollView>
+      <ScrollView
+        ref={ref => this.scrollView = ref}
+        onContentSizeChange={(contentWidth, contentHeight)=>{        
+            this.scrollView.scrollToEnd({animated: true});
+        }}
+      >
         <View style={styles.container}>
           <View>
             <Text>Find fellow players by name...</Text>
             <TextInput 
             onChangeText={(text) => this.setState({text})}
             />
-            <Button 
+            <TouchableOpacity 
+              style={styles.button} 
               onPress={() => this.props.data.refetch({
                 alias: this.state.text, 
                 playOverwatch: false, 
@@ -66,28 +72,28 @@ class Users extends Component {
                 horarioManana: false,
                 horarioTarde: false,
                 horarioNoche: false
-              })} 
-              title="FIND"
-            />
+              })}>
+              <Text style={styles.buttonText}>FIND</Text>
+            </TouchableOpacity>
           </View>
           <View>
             <Text>...or by game and availability</Text>
             <View style={{flexDirection: 'row'}}>
               <View style={{flex:1}}>
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Wow'
                   checked={this.state.wow}
                   onPress={() => this.setState({wow: !this.state.wow})}
                 />
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='GTA'
                   checked={this.state.gta}
                   onPress={() => this.setState({gta: !this.state.gta})}
                 />
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='OverWatch'
                   checked={this.state.over}
                   onPress={() => this.setState({over: !this.state.over})}
@@ -95,46 +101,48 @@ class Users extends Component {
               </View>
               <View style={{flex:1}}>
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Rust'
                   checked={this.state.rust}
                   onPress={() => this.setState({rust: !this.state.rust})}
                 />
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Fortnite'
                   checked={this.state.fort}
                   onPress={() => this.setState({fort: !this.state.fort})}
                 />
                 <CheckBox
-                  containerStyle={{flexGrow: 1}}
+                  containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='PUBG'
                   checked={this.state.pubg}
                   onPress={() => this.setState({pubg: !this.state.pubg})}
                 />
               </View>
             </View>
-            <View>
+            <Divider style={{ backgroundColor: 'grey', marginVertical: 10 }} />
+            <View style={{flexDirection: 'row', justifyContent:'center', flexWrap: 'wrap'}}>
               <CheckBox
-                containerStyle={{flexGrow: 1, alignItems: 'center'}}
-                title='Mañanas'
+                containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
+                title='Morning'
                 checked={this.state.manana}
                 onPress={() => this.setState({manana: !this.state.manana})}
               />
               <CheckBox
-                containerStyle={{flexGrow: 1, alignItems: 'center'}}
-                title='Tardes'
+                containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
+                title='Afternoon'
                 checked={this.state.tarde}
                 onPress={() => this.setState({tarde: !this.state.tarde})}
               />
               <CheckBox
-                containerStyle={{flexGrow: 1, alignItems: 'center'}}
-                title='Noches'
+                containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
+                title='Evening'
                 checked={this.state.noche}
                 onPress={() => this.setState({noche: !this.state.noche})}
               />
             </View>
-            <Button 
+            <TouchableOpacity 
+              style={styles.button}
               onPress={() => this.props.data.refetch({
                 alias: "", 
                 playOverwatch: this.state.over, 
@@ -146,9 +154,9 @@ class Users extends Component {
                 horarioManana: this.state.manana,
                 horarioTarde: this.state.tarde,
                 horarioNoche: this.state.noche
-              })} 
-              title="FIND"
-            />
+              })}>
+              <Text style={styles.buttonText}>FIND</Text>
+            </TouchableOpacity>
             <FlatList
               data={data.filterUser}
               keyExtractor={item => item.alias}
@@ -176,6 +184,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: 5
+  },
+  button:{
+    width: '100%', 
+    padding: 10, 
+    backgroundColor: 'blue',
+    marginVertical: 10,
+    borderRadius:4
+  },
+  buttonText:{
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
   },
 })
 
