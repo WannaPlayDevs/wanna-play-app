@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, Button, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncStorage, TouchableOpacity } from 'react-native'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
 import { FontAwesome } from 'react-native-vector-icons'
-
+import { Button } from 'react-native-elements'
+ 
 import { getUserInfo } from '../actions/user'
 import { logout } from '../actions/user';
 
@@ -101,16 +102,6 @@ class Perfil extends Component {
             <View style={styles.userAvatar}>
               <Text style={{ fontSize: 40, fontWeight: 'bold', color: 'white' }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                console.log(this.state)
-                this.props.navigation.navigate("Edit", { data: me })
-              }}
-              title="Edit Profile"
-              color="blue"
-          >
-            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
-          </TouchableOpacity>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
             <Text>@{me ? me.username : null}</Text>
           </View>
@@ -129,11 +120,19 @@ class Perfil extends Component {
             </View>
           </View>
             {this.renderGames()}
-          <Button
-            backgroundColor="#03A9F4"
-            title="LOG OUT"
-            onPress={this._logout}
-          />
+          <TouchableOpacity style={styles.button} onPress={this._logout}>
+            <Text style={styles.buttonText}>LOG OUT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate("Edit", { data: me })
+              }}
+              title="Edit Profile"
+              color="blue"
+              style={styles.edit}
+          >
+            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     )
@@ -190,6 +189,25 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginRight: 10
   },
+  button:{
+    width: '70%', 
+    padding: 10, 
+    backgroundColor: 'red',
+    marginVertical: 10,
+    borderRadius:4
+  },
+  buttonText:{
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  edit: {
+    position: 'absolute',
+    top: 10,
+    right: 20,
+    zIndex: 2
+  }
 })
 
 export default withApollo(compose(

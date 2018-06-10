@@ -7,13 +7,11 @@ import me from '../graphql/queries/me'
 import Mensaje from '../components/Mensaje'
 
 class Mensajes extends Component {
-  
+
   _renderItem = ({ item }) => <Mensaje mensaje item={item} />
 
   render() {
     const { data } = this.props
-    console.log('Mensajes', this.props)
-    console.log("fk", this.props)
 
     if(data.misMensajes && data.misMensajes.length == 0){
       return <Text>No tienes ningun mensaje!</Text>
@@ -35,6 +33,7 @@ query misMensajes($fkDestinatario: String!) {
   misMensajes(fkDestinatario: $fkDestinatario) {
     cuerpo
     asunto
+    fecha
     fkRemitente{
       pkUser
       username

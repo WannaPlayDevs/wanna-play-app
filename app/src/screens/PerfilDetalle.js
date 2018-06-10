@@ -139,15 +139,19 @@ class PerfilDetalle extends Component {
             </View>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{me ? me.alias : null}</Text>
             <Text>@{me ? me.username : null}</Text>
+            <TouchableOpacity style={styles.edit} onPress={this._toggleModal}>
+              <FontAwesome name="envelope" color={'#03A9F4'} size={30}/>
+            </TouchableOpacity>
           </View>
           <View style={styles.userInfo}>
             <View style={styles.section}>
               <Text>Availability</Text>
               {this.renderAvailability()}
             </View>
-            <TouchableOpacity style={styles.section} onPress={this._toggleModal}>
-              <FontAwesome name="envelope" color={'#03A9F4'} size={30}/>
-            </TouchableOpacity>
+            <View style={styles.section}>
+              <Text>Age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>23</Text>
+            </View>
             <View style={styles.section}>
               <Text>Language</Text>
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
@@ -208,8 +212,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: 5
+  },
+  edit: {
+    position: 'absolute',
+    top: 35,
+    right: -45,
+    zIndex: 2
   }
-
 })
 
 export default (compose(

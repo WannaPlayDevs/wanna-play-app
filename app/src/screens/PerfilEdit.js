@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { withApollo, graphql } from 'react-apollo'
+import { CheckBox } from 'react-native-elements'
+import { Button } from 'react-native-elements';
 
 import UPDATE_USER from '../graphql/mutations/editProfile'
 
@@ -8,18 +10,47 @@ class PerfilEdit extends Component {
   constructor(props) {
     super(props)
     this.state = { 
-      alias: '',
+      alias: this.props.navigation.getParam('data').alias,
+      playGta: this.props.navigation.getParam('data').playGta,
+      playOverwatch: this.props.navigation.getParam('data').playOverwatch,
+      playFortnite: this.props.navigation.getParam('data').playFortnite,
+      playPubg: this.props.navigation.getParam('data').playPubg,
+      playWow: this.props.navigation.getParam('data').playWow,
+      playRust: this.props.navigation.getParam('data').playRust,
+      horarioManana: this.props.navigation.getParam('data').horarioManana,
+      horarioTarde: this.props.navigation.getParam('data').horarioTarde,
+      horarioNoche: this.props.navigation.getParam('data').horarioNoche,
       errors: []
     }
   }
 
   _onUpdate = async () => {
-    const { alias } = this.state
+    const { 
+      alias,
+      playGta,
+      playOverwatch,
+      playFortnite,
+      playPubg,
+      playWow,
+      playRust,
+      horarioManana,
+      horarioTarde,
+      horarioNoche
+    } = this.state
     const me = this.props.navigation.getParam('data', '!ops!')
 
     const { data, errors } = await this.props.mutate({
       variables: {
         alias,
+        playGta,
+        playOverwatch,
+        playFortnite,
+        playPubg,
+        playWow,
+        playRust,
+        horarioManana,
+        horarioTarde,
+        horarioNoche,
         pkUser: me.pkUser,
       }
     }).catch(res => {
@@ -33,26 +64,147 @@ class PerfilEdit extends Component {
   render() {
     const me = this.props.navigation.getParam('data', '!ops!')
     return (
-      <View>
-        <TextInput
-          onChangeText={(text) => this.setState({alias: text})}
-          value={this.state.alias}
-        />
-        <Text>Prop desde perfil - alias: {me.alias}</Text>
-        <Text>Prop desde perfil - pkuser : {me.pkUser}</Text>
-        <Text>Prop desde perfil - username : {me.username}</Text>
-        <Button
-          onPress={this._onUpdate}
-          title="Save"
-          color="blue"
-        />
-      </View>
+      <ScrollView>
+        <View style={{alignItems: 'center'}}>
+          <View style={{padding: 10, justifyContent: 'space-between', width: '100%', flexWrap: 'wrap', flexDirection: 'row',}}>
+            <View style={{marginRight: 10}}>
+              <Text style={{fontWeight: 'bold',}}>Alias</Text>
+              <TextInput
+                style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 5, width: 100}}
+                onChangeText={(text) => this.setState({alias: text})}
+                value={this.state.alias}
+              />
+            </View>
+            <View style={{marginRight: 10}}>
+              <Text style={{fontWeight: 'bold',}}>Age</Text>
+              <TextInput
+                style={{borderBottomWidth: 1, paddingVertical: 5, width: 40}}
+              />
+            </View>
+            <View style={{marginRight: 10}}>
+              <Text style={{fontWeight: 'bold',}}>Country</Text>
+              <TextInput
+                style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
+              />
+            </View>
+            <View style={{marginRight: 10}}>
+              <Text style={{fontWeight: 'bold',}}>Language</Text>
+              <TextInput
+                style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
+              />
+            </View>
+          </View>
+          <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
+            <TouchableOpacity
+              onPress={() => this.setState({playWow: !this.state.playWow})}
+            >
+              <Image
+              style={this.state.playWow ? styles.selectedGames : styles.unselectedGames}
+              source={require('../../assets/images/wow.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({playFortnite: !this.state.playFortnite})}
+            >
+              <Image
+                style={this.state.playFortnite ? styles.selectedGames : styles.unselectedGames}
+                source={require('../../assets/images/fortnite.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({playGta: !this.state.playGta})}
+            >
+              <Image
+                style={this.state.playGta ? styles.selectedGames : styles.unselectedGames}
+                source={require('../../assets/images/gta.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({playOverwatch: !this.state.playOverwatch})}
+            >
+              <Image
+                style={this.state.playOverwatch ? styles.selectedGames : styles.unselectedGames}
+                source={require('../../assets/images/over.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({playPubg: !this.state.playPubg})}
+            >
+              <Image
+                style={this.state.playPubg ? styles.selectedGames : styles.unselectedGames}
+                source={require('../../assets/images/pubg.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({playRust: !this.state.playRust})}
+            >
+              <Image
+                style={this.state.playRust ? styles.selectedGames : styles.unselectedGames}
+                source={require('../../assets/images/rust.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent:'center', flexWrap: 'wrap'}}>
+            <CheckBox
+              title='Mañanas'
+              containerStyle={{backgroundColor: 'transparent'}}
+              checked={this.state.horarioManana}
+              onPress={() => this.setState({horarioManana: !this.state.horarioManana})}
+            />
+            <CheckBox
+              title='Tardes'
+              containerStyle={{backgroundColor: 'transparent'}}
+              checked={this.state.horarioTarde}
+              onPress={() => this.setState({horarioTarde: !this.state.horarioTarde})}
+            />
+            <CheckBox
+              title='Noches'
+              containerStyle={{backgroundColor: 'transparent'}}
+              checked={this.state.horarioNoche}
+              onPress={() => this.setState({horarioNoche: !this.state.horarioNoche})}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={this._onUpdate}>
+            <Text style={styles.buttonText}>SAVE</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-
+  selectedGames: {
+    width: 100,
+    height: 139,
+    borderRadius: 10,
+    marginRight: 20,
+    resizeMode: 'stretch',
+    margin: 5,
+    opacity: 1
+  },
+  unselectedGames: {
+    width: 100,
+    height: 139,
+    borderRadius: 10,
+    marginRight: 20,
+    resizeMode: 'stretch',
+    margin: 5,
+    opacity: 0.3
+  },
+  button:{
+    width: '70%', 
+    padding: 10, 
+    backgroundColor: '#03A9F4',
+    marginVertical: 10,
+    borderRadius:4
+  },
+  buttonText:{
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 })
 
 export default graphql(UPDATE_USER)(PerfilEdit)
