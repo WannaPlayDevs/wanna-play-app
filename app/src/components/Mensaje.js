@@ -89,24 +89,18 @@ class Mensaje extends Component {
     return (
       <TouchableOpacity onPress={this._toggleModal}>
         <View style={styles.container}>
-        <View
-        style={{
-          backgroundColor: "#bcbec1",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 50,
-          height: 50,
-          borderRadius: 25,
-          alignSelf: "center",
-          marginRight: 10
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 28 }}>{item.fkRemitente.alias.charAt(0).toUpperCase()}</Text>
-      </View>
+          <View style={styles.userAvatar}>
+            <Text style={{ color: "white", fontSize: 28 }}>{item.fkRemitente.alias.charAt(0).toUpperCase()}</Text>
+          </View>
           <View style={styles.datos}>
-            <Text style={styles.textName}>{item.fkRemitente.alias}</Text>
-            <Text style={styles.asunto}>{item.asunto}</Text>
-            <Text style={styles.body}>{item.cuerpo}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+              <Text style={styles.textName}>{item.fkRemitente.alias}</Text>
+              <Text style={styles.body}>{item.fecha.substring(0, 10)}</Text>
+            </View>
+            <View>
+              <Text style={styles.asunto}>{item.asunto}</Text>
+              <Text style={styles.body}>{item.cuerpo}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -116,10 +110,14 @@ class Mensaje extends Component {
 
 const styles = StyleSheet.create({
   userAvatar: {
+    backgroundColor: "#bcbec1",
+    alignItems: "center",
+    justifyContent: "center",
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 10,
+    alignSelf: "center",
+    marginRight: 10
   },
   container: {
     flex: 1,
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   datos: {
-    justifyContent: 'space-between'
+    flex: 1
   },
   textName: {
     fontSize: 22,

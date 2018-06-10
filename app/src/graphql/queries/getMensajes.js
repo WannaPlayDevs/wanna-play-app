@@ -5,6 +5,7 @@ query misMensajes($fkDestinatario: String!) {
   misMensajes(fkDestinatario: $fkDestinatario) {
     cuerpo
     asunto
+    fecha
     fkRemitente{
       pkUser
       username
