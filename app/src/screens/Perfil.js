@@ -47,24 +47,11 @@ class Perfil extends Component {
       !(me && me.playWow) &&
       !(me && me.playPubg)
     ){
-<<<<<<< Updated upstream
-      return <Text>Edit your preferences by pressing the blue pencil icon</Text>
-=======
       return (
-        <View style={{width: '80%', alignItems: 'center', margin: 20}}>
-          <Text style={{fontSize: 18}}>Provide us more information about yourself by pressing:</Text>
-          <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.navigate("Edit", { data: me })
-              }}
-              title="Edit Profile"
-              color="blue"
-          >
-            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
-          </TouchableOpacity>
+        <View style={{width: '90%', alignItems: 'center', margin: 20}}>
+          <Text style={{fontSize: 18}}>Provide us more information about yourself by pressing the blue pen icon:</Text>
         </View>
       )
->>>>>>> Stashed changes
     }
     return(
       <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
@@ -129,11 +116,11 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>23</Text>
             </View>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.language</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
             </View>
           </View>
             {this.renderGames()}
