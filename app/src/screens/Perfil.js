@@ -47,7 +47,24 @@ class Perfil extends Component {
       !(me && me.playWow) &&
       !(me && me.playPubg)
     ){
+<<<<<<< Updated upstream
       return <Text>Edit your preferences by pressing the blue pencil icon</Text>
+=======
+      return (
+        <View style={{width: '80%', alignItems: 'center', margin: 20}}>
+          <Text style={{fontSize: 18}}>Provide us more information about yourself by pressing:</Text>
+          <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate("Edit", { data: me })
+              }}
+              title="Edit Profile"
+              color="blue"
+          >
+            <FontAwesome name="pencil" size={25} color={'#03A9F4'}/>
+          </TouchableOpacity>
+        </View>
+      )
+>>>>>>> Stashed changes
     }
     return(
       <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
