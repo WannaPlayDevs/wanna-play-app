@@ -45,10 +45,7 @@ class Mensaje extends Component {
         <View>
           <Modal backdropOpacity={1} backdropColor={'black'} isVisible={this.state.modal}>
             <Card style={{flex: 1, width: '100%', alignItems: 'center'}}>
-              <Text>
-                <Text></Text>
-                <Text style={{fontWeight: 'bold', fontSize: 18 }}>Reply to {item.fkRemitente.alias}'s message:</Text>
-              </Text>
+              <Text style={{fontWeight: 'bold', fontSize: 18 }}>Reply to {item.fkRemitente.alias}'s message:</Text>
               <Text style={{fontStyle: 'italic' , fontSize: 14}}>{item.cuerpo}</Text>
               <Divider style={{ backgroundColor: 'grey', marginVertical: 10 }} />
               <TextInput 

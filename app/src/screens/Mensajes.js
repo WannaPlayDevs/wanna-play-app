@@ -14,7 +14,11 @@ class Mensajes extends Component {
     const { data } = this.props
 
     if(data.misMensajes && data.misMensajes.length == 0){
-      return <Text>Your inbox is empty</Text>
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Your inbox is empty</Text>
+        </View>
+      )
     }
 
     return (

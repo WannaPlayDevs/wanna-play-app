@@ -112,11 +112,11 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>22</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.age</Text>
             </View>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.language</Text>
             </View>
           </View>
             {this.renderGames()}

@@ -105,25 +105,32 @@ class PerfilDetalle extends Component {
     if(this.state.modal){
       return(
         <View>
-          <Modal backdropOpacity={1} backdropColor={'white'} isVisible={this.state.modal} s>
-            <View style={{height: '100%', width: '100%', alignItems: 'center',}}>
+          <Modal backdropOpacity={1} backdropColor={'black'} isVisible={this.state.modal}>
+            <Card style={{flex: 1, width: '100%', alignItems: 'center'}}>
               <TextInput 
-                placeholder='Asunto'
+                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                placeholder='Subject'
+                underlineColorAndroid='transparent'
+                maxLength={30}
                 onChangeText={text => this._onChangeText(text, 'asunto')}  
               />
               <TextInput 
-                placeholder='Cuerpo'
+                placeholder='Type your message here'
                 onChangeText={text => this._onChangeText(text, 'cuerpo')}
                 multiline={true}
-                numberOfLines={10}
+                maxLength={120}
+                underlineColorAndroid='transparent'
+                style={{borderColor: 'gray', borderWidth: 1, paddingLeft: 5}}
               />
-              <TouchableOpacity onPress={this._toggleModal}>
-                <Text>Cancelar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this._responseMessage}>
-                <Text>Responder</Text>
-              </TouchableOpacity>
-            </View>
+              <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity style={styles.button} onPress={this._responseMessage}>
+                  <Text style={styles.buttonText}>SEND</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={this._toggleModal}>
+                  <Text style={styles.buttonText}>CANCEL</Text>
+                </TouchableOpacity>
+              </View>
+            </Card>
           </Modal>
         </View>
       )
@@ -150,11 +157,11 @@ class PerfilDetalle extends Component {
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>23</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.age</Text>
             </View>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>English</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.language</Text>
             </View>
           </View>
             {this.renderGames()}
