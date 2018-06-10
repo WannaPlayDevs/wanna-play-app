@@ -59,9 +59,10 @@ class Signup extends Component {
         <View>
         <Modal backdropOpacity={0.9} isVisible={this.state.modal}>
           <View style={styles.modal}>
-            <Text style={styles.modalText}>Registration successful{"\n"}You can login now</Text>
+            <Text style={styles.modalText}>Registration successful!</Text>
+            <Text style={styles.modalText}>You can login now</Text>
             <TouchableOpacity style={styles.modalButton} onPress={this._toggleModal}>
-              <Text style={styles.buttonText}>OK!!</Text>
+              <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -73,23 +74,23 @@ class Signup extends Component {
     return (
       <View style={{ paddingVertical: 20 }}>
       <Card>
-        <FormLabel>User Name</FormLabel>
+        <FormLabel>Alias</FormLabel>
         <FormInput 
-          placeholder="User name..." 
+          placeholder="Your nickname"
+          autoCapitalize="words"
+          onChangeText={text => this._onChangeText(text, 'alias')}
+        />
+        <FormLabel>Username</FormLabel>
+        <FormInput 
+          placeholder="Username" 
           autoCapitalize="none"
           onChangeText={text => this._onChangeText(text, 'username')}
         />
         <FormLabel>Password</FormLabel>
         <FormInput 
           secureTextEntry 
-          placeholder="Password..." 
+          placeholder="Password" 
           onChangeText={text => this._onChangeText(text, 'password')}
-        />
-        <FormLabel>Alias</FormLabel>
-        <FormInput 
-          placeholder="Alias..."
-          autoCapitalize="words"
-          onChangeText={text => this._onChangeText(text, 'alias')}
         />
 
         <Button
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     paddingBottom: 20,
+    textAlign: 'center',
   }, 
   buttonText:{
     textAlign: 'center',

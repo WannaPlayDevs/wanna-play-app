@@ -54,14 +54,14 @@ class Login extends Component {
         <Card>
           <FormLabel>User</FormLabel>
           <FormInput 
-            placeholder="User name..."
+            placeholder="Username"
             autoCapitalize="none"
             onChangeText={text => this._onChangeText(text, 'username')}
           />
           <FormLabel>Password</FormLabel>
           <FormInput 
             secureTextEntry 
-            placeholder="Password..."
+            placeholder="Password"
             shake={this.state.errors} 
             onChangeText={text => this._onChangeText(text, 'password')}
           />

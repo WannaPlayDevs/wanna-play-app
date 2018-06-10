@@ -54,7 +54,7 @@ class PerfilDetalle extends Component {
       !(me && me.playWow) &&
       !(me && me.playPubg)
     ){
-      return <Text>No hay juegos que mostrar</Text>
+      return <Text>The user has not selected any games yet</Text>
     }
     return(
       <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>

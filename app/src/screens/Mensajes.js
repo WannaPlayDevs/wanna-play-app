@@ -14,7 +14,7 @@ class Mensajes extends Component {
     const { data } = this.props
 
     if(data.misMensajes && data.misMensajes.length == 0){
-      return <Text>No tienes ningun mensaje!</Text>
+      return <Text>Your inbox is empty</Text>
     }
 
     return (

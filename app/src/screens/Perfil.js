@@ -47,7 +47,7 @@ class Perfil extends Component {
       !(me && me.playWow) &&
       !(me && me.playPubg)
     ){
-      return <Text>No hay juegos que mostrar</Text>
+      return <Text>Edit your preferences by pressing the blue pencil icon</Text>
     }
     return(
       <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
@@ -112,7 +112,7 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>23</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>22</Text>
             </View>
             <View style={styles.section}>
               <Text>Language</Text>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput  } from 'react-native';
 import Modal from "react-native-modal";
+import { Card, Divider } from 'react-native-elements'
 
 import { graphql } from 'react-apollo'
 import RESPONSE_MESSAGE from './../graphql/mutations/responseMessage'
@@ -42,46 +43,39 @@ class Mensaje extends Component {
     if(this.state.modal){
       return(
         <View>
-        <Modal backdropOpacity={1} backdropColor={'white'} isVisible={this.state.modal} s>
-          <View style={{height: '100%', width: '100%', alignItems: 'center',}}>
-          <View
-          style={{
-            backgroundColor: "#bcbec1",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 60,
-            height: 60,
-            borderRadius: 30,
-            alignSelf: "center",
-            marginBottom: 20
-          }}
-        >
-          <Text style={{ color: "white", fontSize: 28 }}>{item.fkRemitente.alias.charAt(0).toUpperCase()}</Text>
-        </View>
-        <Text>{item.fkRemitente.alias}</Text>
-        <Text>{item.asunto}</Text>
-        <Text>{item.cuerpo}</Text>
-
-        <TextInput 
-          placeholder='Asunto'
-          onChangeText={text => this._onChangeText(text, 'asunto')}  
-        />
-
-        <TextInput 
-          placeholder='Cuerpo'
-          onChangeText={text => this._onChangeText(text, 'cuerpo')}
-          multiline={true}
-          numberOfLines={10}
-        />
-
-        <TouchableOpacity onPress={this._toggleModal}>
-          <Text>Cancelar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this._responseMessage}>
-          <Text>Responder</Text>
-        </TouchableOpacity>
-          </View>
-        </Modal>
+          <Modal backdropOpacity={1} backdropColor={'black'} isVisible={this.state.modal}>
+            <Card style={{flex: 1, width: '100%', alignItems: 'center'}}>
+              <Text>
+                <Text></Text>
+                <Text style={{fontWeight: 'bold', fontSize: 18 }}>Reply to {item.fkRemitente.alias}'s message:</Text>
+              </Text>
+              <Text style={{fontStyle: 'italic' , fontSize: 14}}>{item.cuerpo}</Text>
+              <Divider style={{ backgroundColor: 'grey', marginVertical: 10 }} />
+              <TextInput 
+                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                placeholder='Subject'
+                underlineColorAndroid='transparent'
+                maxLength={30}
+                onChangeText={text => this._onChangeText(text, 'asunto')}  
+              />
+              <TextInput 
+                placeholder='Type your message here'
+                onChangeText={text => this._onChangeText(text, 'cuerpo')}
+                multiline={true}
+                maxLength={120}
+                underlineColorAndroid='transparent'
+                style={{borderColor: 'gray', borderWidth: 1, paddingLeft: 5}}
+              />
+              <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity style={styles.button} onPress={this._responseMessage}>
+                  <Text style={styles.buttonText}>SEND</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={this._toggleModal}>
+                  <Text style={styles.buttonText}>CANCEL</Text>
+                </TouchableOpacity>
+              </View>
+            </Card>
+          </Modal>
         </View>
       )
     }
@@ -139,7 +133,21 @@ const styles = StyleSheet.create({
   },
   asunto: {
     fontSize: 14
-  }
+  },
+  button:{
+    padding: 10, 
+    backgroundColor: 'blue',
+    marginVertical: 10,
+    marginHorizontal: 5,
+    borderRadius:4,
+    flexGrow: 1,
+  },
+  buttonText:{
+    textAlign: 'center',
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 })
 
 export default graphql(RESPONSE_MESSAGE)(Mensaje)

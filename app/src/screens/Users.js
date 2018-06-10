@@ -57,7 +57,11 @@ class Users extends Component {
           <View>
             <Text>Find fellow players by name...</Text>
             <TextInput 
-            onChangeText={(text) => this.setState({text})}
+                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                placeholder='Subject'
+                underlineColorAndroid='transparent'
+                maxLength={30}
+                onChangeText={(text) => this.setState({text})}
             />
             <TouchableOpacity 
               style={styles.button} 
@@ -172,6 +176,7 @@ class Users extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
     paddingVertical: 30,
     paddingHorizontal: 30,
     justifyContent: 'space-around',
