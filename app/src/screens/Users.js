@@ -17,7 +17,8 @@ class Users extends Component {
     pubg: false,
     manana: false,
     tarde: false,
-    noche: false
+    noche: false,
+    error: ''
   }
 
   _renderAvailability(item){
@@ -65,7 +66,7 @@ class Users extends Component {
             />
             <TouchableOpacity 
               style={styles.button} 
-              onPress={() => this.props.data.refetch({
+              onPress={() => {this.props.data.refetch({
                 alias: this.state.text, 
                 playOverwatch: false, 
                 playWow: false, 
@@ -76,7 +77,7 @@ class Users extends Component {
                 horarioManana: false,
                 horarioTarde: false,
                 horarioNoche: false
-              })}>
+              });this.setState({error:"No results found"})}}>
               <Text style={styles.buttonText}>FIND</Text>
             </TouchableOpacity>
           </View>
@@ -147,7 +148,7 @@ class Users extends Component {
             </View>
             <TouchableOpacity 
               style={styles.button}
-              onPress={() => this.props.data.refetch({
+              onPress={() => {this.props.data.refetch({
                 alias: "", 
                 playOverwatch: this.state.over, 
                 playWow: this.state.wow, 
@@ -158,14 +159,20 @@ class Users extends Component {
                 horarioManana: this.state.manana,
                 horarioTarde: this.state.tarde,
                 horarioNoche: this.state.noche
-              })}>
+              });this.setState({error:"No results found"})}}>
               <Text style={styles.buttonText}>FIND</Text>
             </TouchableOpacity>
-            <FlatList
-              data={data.filterUser}
-              keyExtractor={item => item.alias}
-              renderItem={this._renderItem}
-            />
+            {
+              this.props.data.filterUser
+              ?
+              <FlatList
+                data={data.filterUser}
+                keyExtractor={item => item.alias}
+                renderItem={this._renderItem}
+              />
+              : 
+              <Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>{this.state.error}</Text>
+            }
           </View>
         </View>
       </ScrollView>
@@ -176,7 +183,7 @@ class Users extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 10,
     paddingVertical: 30,
     paddingHorizontal: 30,
     justifyContent: 'space-around',

@@ -49,7 +49,7 @@ class Perfil extends Component {
     ){
       return (
         <View style={{width: '90%', alignItems: 'center', margin: 20}}>
-          <Text style={{fontSize: 18}}>Provide us more information about yourself by pressing the blue pen icon:</Text>
+          <Text style={{fontSize: 18, textAlign: 'center'}}>Provide us more information about yourself by pressing the blue pen icon</Text>
         </View>
       )
     }
