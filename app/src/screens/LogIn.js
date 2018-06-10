@@ -32,24 +32,19 @@ class Login extends Component {
       const errors = res.graphQLErrors.map(error => error.message);
       this.setState({ errors });
     });
-
-    console.log(errors)
     try {
       
       await AsyncStorage.setItem('@token', data.tokenAuth.token)      
       return this.props.login()
       
     } catch (error) {
-      console.log('this.props.data.error')
       throw error
     }
     
   }
 
   render(){
-    console.log(this.state.errors)
-    return(
-      
+    return(      
       <View style={{ paddingVertical: 20 }}>
         <Card>
           <FormLabel>User</FormLabel>

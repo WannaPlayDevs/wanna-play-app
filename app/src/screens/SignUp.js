@@ -47,7 +47,6 @@ class Signup extends Component {
 
   renderErrors () {
     const { errors } = this.state
-    console.log('errors')      
       if (errors[0] === 'UNIQUE constraint failed: auth_user.username'){
         return 'El usuario ya existe'
       }
@@ -70,7 +69,6 @@ class Signup extends Component {
         </View>
       )
     }
-    console.log(this.state.errors)
     return (
       <View style={{ paddingVertical: 20 }}>
       <Card>

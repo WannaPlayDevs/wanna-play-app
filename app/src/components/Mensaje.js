@@ -38,8 +38,6 @@ class Mensaje extends Component {
 
   render() {
     const {item} = this.props
-    console.log('item', item)
-
     if(this.state.modal){
       return(
         <View>
@@ -49,7 +47,7 @@ class Mensaje extends Component {
               <Text style={{fontStyle: 'italic' , fontSize: 14}}>{item.cuerpo}</Text>
               <Divider style={{ backgroundColor: 'grey', marginVertical: 10 }} />
               <TextInput 
-                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, padding: 10, borderRadius: 10 }}
                 placeholder='Subject'
                 underlineColorAndroid='transparent'
                 maxLength={30}
@@ -61,7 +59,7 @@ class Mensaje extends Component {
                 multiline={true}
                 maxLength={120}
                 underlineColorAndroid='transparent'
-                style={{borderColor: 'gray', borderWidth: 1, paddingLeft: 5}}
+                style={{borderColor: 'gray', borderWidth: 1, padding: 10, borderRadius: 10 }}
               />
               <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between'}}>
                 <TouchableOpacity style={styles.button} onPress={this._responseMessage}>

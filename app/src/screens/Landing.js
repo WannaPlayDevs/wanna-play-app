@@ -20,44 +20,43 @@ export default class Landing extends Component {
     modal: false
   }
   render(){
-    console.log(this.state)
     if(this.state.modal){
       return(
           
-            <LinearGradient
-              colors={['#2575fc', '#6a11cb']} 
-              locations={[0.25, 1]} 
-              style={styles.container}
-            >
-              <Modal backdropOpacity={0.1} backdropColor={'black'} isVisible={this.state.modal}>
-                <View style={styles.logoContainer}>
-                  <Image
-                      style={styles.logo}
-                      source={require('../../assets/images/logo.png')}
-                  />
-                </View>
-                <View style={styles.logoContainer}>
-                  <Text style={styles.footerText}>WannaPlay Devs Inc</Text>
-                  
-                  <View style={{marginVertical: 15}}>
-                  <Text style={styles.developer}>Ivan Barbero / @ibarla</Text>
-                  <Text style={styles.developer}>Jose Miguel Paredes  / @jmpr5</Text>
-                  <Text style={styles.developer}>Kike Guilabert  / @HenryTux</Text>
-                  <Text style={styles.developer}>Sergio Martinez  / @titoserch</Text>
-                  </View>
-                  <Text style={styles.dev}><FontAwesome name="github" color="white" size={30} />  Follow us:</Text>
-                  <Text style={styles.developer}>https://github.com/WannaPlayDevs</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={() => this.setState({ modal: false })}
-                  color="blue"
-                  style={styles.edit}
-                >
-                  <FontAwesome name="times-circle" size={25} color={'white'}/>
-                </TouchableOpacity>
-              </Modal>
+        <LinearGradient
+          colors={['#2575fc', '#6a11cb']} 
+          locations={[0.25, 1]} 
+          style={styles.container}
+        >
+          <Modal backdropOpacity={0.1} backdropColor={'black'} isVisible={this.state.modal}>
+            <View style={styles.logoContainer}>
+              <Image
+                  style={styles.logo}
+                  source={require('../../assets/images/logo.png')}
+              />
+            </View>
+            <View style={styles.logoContainer}>
+              <Text style={styles.footerText}>WannaPlay Devs Inc</Text>
               
-            </LinearGradient>
+              <View style={{marginVertical: 15}}>
+              <Text style={styles.developer}>Ivan Barbero / @ibarla</Text>
+              <Text style={styles.developer}>Jose Miguel Paredes  / @jmpr5</Text>
+              <Text style={styles.developer}>Kike Guilabert  / @HenryTux</Text>
+              <Text style={styles.developer}>Sergio Martinez  / @titoserch</Text>
+              </View>
+              <Text style={styles.dev}><FontAwesome name="github" color="white" size={30} />  Follow us:</Text>
+              <Text style={styles.developer}>https://github.com/WannaPlayDevs</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => this.setState({ modal: false })}
+              color="blue"
+              style={styles.edit}
+            >
+              <FontAwesome name="times-circle" size={25} color={'white'}/>
+            </TouchableOpacity>
+          </Modal>
+          
+        </LinearGradient>
       )
     }
     return(
