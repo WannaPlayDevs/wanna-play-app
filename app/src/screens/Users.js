@@ -44,9 +44,6 @@ class Users extends Component {
 
   render() {
     const { data } = this.props
-    console.log('usuarer', data)
-    console.log('state user', this.state)
-
     return (
       <ScrollView
         ref={ref => this.scrollView = ref}

@@ -4,6 +4,7 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
 import { FontAwesome } from 'react-native-vector-icons'
 import Modal from "react-native-modal";
+import { Card } from 'react-native-elements'
 
 import RESPONSE_MESSAGE from './../graphql/mutations/responseMessage'
 
@@ -100,15 +101,13 @@ class PerfilDetalle extends Component {
   render() {
     const me = this.props.navigation.getParam('data', '!ops!')
     const { navigate } = this.props.navigation
-    console.log('perfil detalle ', this.props)
-
     if(this.state.modal){
       return(
         <View>
           <Modal backdropOpacity={1} backdropColor={'black'} isVisible={this.state.modal}>
             <Card style={{flex: 1, width: '100%', alignItems: 'center'}}>
               <TextInput 
-                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                style={{borderColor: 'gray', borderRadius: 10, borderWidth: 1, marginBottom: 5, padding: 10}}
                 placeholder='Subject'
                 underlineColorAndroid='transparent'
                 maxLength={30}
@@ -120,7 +119,7 @@ class PerfilDetalle extends Component {
                 multiline={true}
                 maxLength={120}
                 underlineColorAndroid='transparent'
-                style={{borderColor: 'gray', borderWidth: 1, paddingLeft: 5}}
+                style={{borderColor: 'gray', borderRadius: 10, borderWidth: 1, padding: 10}}
               />
               <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between'}}>
                 <TouchableOpacity style={styles.button} onPress={this._responseMessage}>

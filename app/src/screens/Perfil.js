@@ -13,7 +13,6 @@ import ME_QUERY from '../graphql/queries/me'
 class Perfil extends Component {
 
   _logout = () => {
-    console.log('onlogout', this.props)
     this.props.client.resetStore()
     return this.props.logout();
   }
