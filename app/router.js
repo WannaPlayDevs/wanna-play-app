@@ -17,7 +17,6 @@ import SignUp from './src/screens/SignUp'
 import Mensajes from './src/screens/Mensajes'
 import PerfilStack from './router-perfilstack'
 import FiltroStack from './router-filtrostack'
-import prueba from './src/screens/prueba'
 
 import getUserInfo  from './src/actions/user'
 

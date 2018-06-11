@@ -4,7 +4,6 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
 import { FontAwesome } from 'react-native-vector-icons'
 import { Button } from 'react-native-elements'
-import {LinearGradient} from 'expo'
  
 import { getUserInfo } from '../actions/user'
 import { logout } from '../actions/user';
@@ -101,30 +100,26 @@ class Perfil extends Component {
     return (
       <ScrollView>
         <StatusBar hidden={true} />
-        <LinearGradient
-          colors={['#2575fc', '#6a11cb']} 
-          locations={[0.25, 1]} 
-          style={{alignItems: 'center'}}
-        >
+        <View style={{alignItems: 'center'}}>
           <View style={styles.userAvatarContainer}>
             <View style={styles.userAvatar}>
               <Text style={{ fontSize: 40, fontWeight: 'bold', color: 'black' }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
             </View>
-            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white' }}>{me ? me.alias : null}</Text>
-            <Text style={{color: 'white' }}>@{me ? me.username : null}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>{me ? me.alias : null}</Text>
+            <Text style={{color: 'black' }}>@{me ? me.username : null}</Text>
           </View>
           <View style={styles.userInfo}>
             <View style={styles.section}>
-              <Text style={{color: 'white' }}>Availability</Text>
+              <Text style={{color: 'black' }}>Availability</Text>
               {this.renderAvailability()}
             </View>
             <View style={styles.section}>
-              <Text style={{color: 'white' }}>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>me.age</Text>
+              <Text style={{color: 'black' }}>Age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>me.age</Text>
             </View>
             <View style={styles.section}>
-              <Text style={{color: 'white' }}>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>me.language</Text>
+              <Text style={{color: 'black' }}>Language</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>me.language</Text>
             </View>
           </View>
             {this.renderGames()}
@@ -135,13 +130,11 @@ class Perfil extends Component {
               onPress={() => {
                 this.props.navigation.navigate("Edit", { data: me })
               }}
-              title="Edit Profile"
-              color="blue"
               style={styles.edit}
           >
-            <FontAwesome name="pencil" size={25} color={'white'}/>
+            <FontAwesome name="pencil" size={25} color={'#3377F4'}/>
           </TouchableOpacity>
-        </LinearGradient>
+        </View>
       </ScrollView>
     )
   }
@@ -186,7 +179,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: 5,
-    color: 'white',
+    color: 'black',
   },
   userAvatar: {
     backgroundColor: "white",
