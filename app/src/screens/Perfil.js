@@ -98,7 +98,7 @@ class Perfil extends Component {
     const { navigate } = this.props.navigation
     this._getUserInfo();
     return (
-      <ScrollView contentContainerStyle={{alignItems: 'center'}} style={{backgroundColor: '#2575fc'}}>
+      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
         <StatusBar hidden={true} />
         <View style={{alignItems: 'center'}}>
           <View style={styles.userAvatarContainer}>
@@ -114,18 +114,20 @@ class Perfil extends Component {
               {this.renderAvailability()}
             </View>
             <View style={styles.section}>
-              <Text style={{color: 'white' }}>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>{me ? me.age : null}</Text>
+              <Text style={{color: 'black' }}>Age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.age : null}</Text>
             </View>
             <View style={styles.section}>
-              <Text style={{color: 'white' }}>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>{me ? me.language : null}</Text>
+              <Text style={{color: 'black' }}>Language</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.language : null}</Text>
             </View>
           </View>
             {this.renderGames()}
+          <View style={{width: '100%', flexDirection: 'row'}}>
           <TouchableOpacity style={styles.button} onPress={this._logout}>
             <Text style={styles.buttonText}>LOG OUT</Text>
           </TouchableOpacity>
+          </View>
           <TouchableOpacity
               onPress={() => {
                 this.props.navigation.navigate("Edit", { data: me })
@@ -182,7 +184,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   userAvatar: {
-    backgroundColor: "white",
+    backgroundColor: "#bcbec1",
     alignItems: "center",
     justifyContent: "center",
     width: 100,
@@ -196,7 +198,7 @@ const styles = StyleSheet.create({
     padding: 10, 
     backgroundColor: 'red',
     marginVertical: 10,
-    borderRadius:4
+    borderRadius:4,
   },
   buttonText:{
     textAlign: 'center',

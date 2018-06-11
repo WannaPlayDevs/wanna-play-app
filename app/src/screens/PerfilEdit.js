@@ -85,6 +85,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 5, width: 100}}
                 onChangeText={(text) => this.setState({alias: text})}
                 value={this.state.alias}
+                maxLength={15}
               />
             </View>
             <View style={{marginRight: 10}}>
@@ -93,6 +94,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 40}}
                 onChangeText={(text) => this.setState({age: text})}
                 value={this.state.age}
+                maxLength={3}
               />
             </View>
             <View style={{marginRight: 10}}>
@@ -101,6 +103,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
                 onChangeText={(text) => this.setState({country: text})}
                 value={this.state.country}
+                maxLength={30}
               />
             </View>
             <View style={{marginRight: 10}}>
@@ -109,6 +112,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
                 onChangeText={(text) => this.setState({language: text})}
                 value={this.state.language}
+                maxLength={30}
               />
             </View>
           </View>
@@ -118,6 +122,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 10, width: '80%'}}
                 onChangeText={(text) => this.setState({description: text})}
                 value={this.state.description}
+                maxLength={120}
               />
             </View>
           <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
@@ -190,6 +195,7 @@ class PerfilEdit extends Component {
               onPress={() => this.setState({horarioNoche: !this.state.horarioNoche})}
             />
           </View>
+          {this.state.errors.length > 0 ? <Text style={{ color: 'red' }}>Age must be a numeric field</Text> : null}
           <TouchableOpacity style={styles.button} onPress={this._onUpdate}>
             <Text style={styles.buttonText}>SAVE</Text>
           </TouchableOpacity>
