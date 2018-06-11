@@ -94,7 +94,7 @@ class PerfilEdit extends Component {
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 40}}
                 onChangeText={(text) => this.setState({age: text})}
                 value={this.state.age}
-                maxLength={3}
+                maxLength={2}
               />
             </View>
             <View style={{marginRight: 10}}>
