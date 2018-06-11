@@ -99,13 +99,8 @@ class Perfil extends Component {
     const { navigate } = this.props.navigation
     this._getUserInfo();
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={{alignItems: 'center'}} style={{backgroundColor: '#2575fc'}}>
         <StatusBar hidden={true} />
-        <LinearGradient
-          colors={['#2575fc', '#6a11cb']} 
-          locations={[0.25, 1]} 
-          style={{alignItems: 'center'}}
-        >
           <View style={styles.userAvatarContainer}>
             <View style={styles.userAvatar}>
               <Text style={{ fontSize: 40, fontWeight: 'bold', color: 'black' }}>{me ? me.alias.charAt(0).toUpperCase() : null}</Text>
@@ -120,11 +115,11 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text style={{color: 'white' }}>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>me.age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>{me ? me.age : null}</Text>
             </View>
             <View style={styles.section}>
               <Text style={{color: 'white' }}>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>me.language</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'white' }}>{me ? me.language : null}</Text>
             </View>
           </View>
             {this.renderGames()}
@@ -141,7 +136,6 @@ class Perfil extends Component {
           >
             <FontAwesome name="pencil" size={25} color={'white'}/>
           </TouchableOpacity>
-        </LinearGradient>
       </ScrollView>
     )
   }

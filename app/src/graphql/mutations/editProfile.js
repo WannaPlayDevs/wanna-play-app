@@ -13,6 +13,10 @@ export default gql`
     $horarioManana: Boolean,
     $horarioTarde: Boolean,
     $horarioNoche: Boolean,
+    $age: Int,
+    $language: String,
+    $description: String,
+    $country: String,
   ){
     updateUser(
       pkUser: $pkUser,
@@ -26,6 +30,10 @@ export default gql`
       horarioManana: $horarioManana,
       horarioTarde: $horarioTarde,
       horarioNoche: $horarioNoche,
+      age: $age,
+      language: $language,
+      description: $description,
+      country: $country,
     ) 
     {
       alias

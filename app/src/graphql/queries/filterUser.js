@@ -42,6 +42,10 @@ query filterUser(
     horarioManana
     horarioTarde
     horarioNoche
+    age
+    language
+    description
+    country
   }
 }  
 `

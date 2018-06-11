@@ -58,7 +58,7 @@ class PerfilDetalle extends Component {
       return <Text>The user has not selected any games yet</Text>
     }
     return(
-      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'}}>
+      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', marginBottom: 20}}>
       <Image
         style={me && me.playWow ? styles.selectedGames : styles.unselectedGames}
         source={require('../../assets/images/wow.png')}
@@ -156,12 +156,16 @@ class PerfilDetalle extends Component {
             </View>
             <View style={styles.section}>
               <Text>Age</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.age</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>{ me ? me.age : null }</Text>
             </View>
             <View style={styles.section}>
               <Text>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>me.language</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>{me ? me.language : null}</Text>
             </View>
+          </View>
+          <View style={{ marginBottom: 10, alignItems: 'center', width: '90%' }}>
+            <Text>Description</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5 }}>{me ? me.description : null}</Text>
           </View>
             {this.renderGames()}
         </View>
@@ -190,7 +194,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 139,
     borderRadius: 10,
-    marginRight: 20,
+    marginHorizontal: 10,
     resizeMode: 'stretch',
     margin: 5,
     opacity: 1
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 139,
     borderRadius: 10,
-    marginRight: 20,
+    marginHorizontal: 10,
     resizeMode: 'stretch',
     margin: 5,
     opacity: 0.3

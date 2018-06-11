@@ -18,6 +18,10 @@ export default gql`
 	horarioManana
 	horarioTarde
 	horarioNoche
+	age
+    language
+    description
+    country
 	}
 }
 `

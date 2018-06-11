@@ -20,7 +20,11 @@ class PerfilEdit extends Component {
       horarioManana: this.props.navigation.getParam('data').horarioManana,
       horarioTarde: this.props.navigation.getParam('data').horarioTarde,
       horarioNoche: this.props.navigation.getParam('data').horarioNoche,
-      errors: []
+      errors: [],
+      age: (this.props.navigation.getParam('data').age).toString(),
+      language: this.props.navigation.getParam('data').language,
+      description: this.props.navigation.getParam('data').description,
+      country: this.props.navigation.getParam('data').country
     }
   }
 
@@ -35,7 +39,11 @@ class PerfilEdit extends Component {
       playRust,
       horarioManana,
       horarioTarde,
-      horarioNoche
+      horarioNoche,
+      age,
+      language,
+      description,
+      country,
     } = this.state
     const me = this.props.navigation.getParam('data', '!ops!')
 
@@ -51,6 +59,10 @@ class PerfilEdit extends Component {
         horarioManana,
         horarioTarde,
         horarioNoche,
+        age,
+        language,
+        description,
+        country,
         pkUser: me.pkUser,
       }
     }).catch(res => {
@@ -79,21 +91,35 @@ class PerfilEdit extends Component {
               <Text style={{fontWeight: 'bold',}}>Age</Text>
               <TextInput
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 40}}
+                onChangeText={(text) => this.setState({age: text})}
+                value={this.state.age}
               />
             </View>
             <View style={{marginRight: 10}}>
               <Text style={{fontWeight: 'bold',}}>Country</Text>
               <TextInput
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
+                onChangeText={(text) => this.setState({country: text})}
+                value={this.state.country}
               />
             </View>
             <View style={{marginRight: 10}}>
               <Text style={{fontWeight: 'bold',}}>Language</Text>
               <TextInput
                 style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
+                onChangeText={(text) => this.setState({language: text})}
+                value={this.state.language}
               />
             </View>
           </View>
+            <View style={{alignItems: 'center', width: '100%'}}>
+              <Text style={{fontWeight: 'bold',}}>Description</Text>
+              <TextInput
+                style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 10, width: '80%'}}
+                onChangeText={(text) => this.setState({description: text})}
+                value={this.state.description}
+              />
+            </View>
           <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
             <TouchableOpacity
               onPress={() => this.setState({playWow: !this.state.playWow})}

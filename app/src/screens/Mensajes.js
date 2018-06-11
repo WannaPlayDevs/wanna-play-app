@@ -12,6 +12,7 @@ class Mensajes extends Component {
 
   render() {
     const { data } = this.props
+    console.log('data', data)
 
     if(data.misMensajes && data.misMensajes.length == 0){
       return (
