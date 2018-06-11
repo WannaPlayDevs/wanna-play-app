@@ -55,7 +55,7 @@ class Users extends Component {
           <View>
             <Text>Find fellow players by name...</Text>
             <TextInput 
-                style={{borderColor: 'gray', borderWidth: 1, marginBottom: 5, paddingLeft: 5}}
+                style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
                 placeholder='Subject'
                 underlineColorAndroid='transparent'
                 maxLength={30}
@@ -159,17 +159,12 @@ class Users extends Component {
               });this.setState({error:"No results found"})}}>
               <Text style={styles.buttonText}>FIND</Text>
             </TouchableOpacity>
-            {
-              this.props.data.filterUser
-              ?
-              <FlatList
-                data={data.filterUser}
-                keyExtractor={item => item.alias}
-                renderItem={this._renderItem}
-              />
-              : 
-              <Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>{this.state.error}</Text>
-            }
+            <FlatList
+              data={data.filterUser}
+              keyExtractor={item => item.alias}
+              renderItem={this._renderItem}
+              ListEmptyComponent={<Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>{this.state.error}</Text>}
+            />
           </View>
         </View>
       </ScrollView>
