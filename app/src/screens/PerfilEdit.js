@@ -21,7 +21,7 @@ class PerfilEdit extends Component {
       horarioTarde: this.props.navigation.getParam('data').horarioTarde,
       horarioNoche: this.props.navigation.getParam('data').horarioNoche,
       errors: [],
-      age: (this.props.navigation.getParam('data').age).toString(),
+      age: this.props.navigation.getParam('data').age,
       language: this.props.navigation.getParam('data').language,
       description: this.props.navigation.getParam('data').description,
       country: this.props.navigation.getParam('data').country
@@ -59,7 +59,7 @@ class PerfilEdit extends Component {
         horarioManana,
         horarioTarde,
         horarioNoche,
-        age,
+        age: age.toString(),
         language,
         description,
         country,
@@ -117,7 +117,7 @@ class PerfilEdit extends Component {
             </View>
           </View>
             <View style={{alignItems: 'center', width: '100%'}}>
-              <Text style={{fontWeight: 'bold',}}>Description</Text>
+              <Text style={{fontWeight: 'bold',}}>Bio</Text>
               <TextInput
                 style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 10, width: '80%'}}
                 onChangeText={(text) => this.setState({description: text})}

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, FlatList, TextInput, Button, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import { graphql } from 'react-apollo'
 import { CheckBox, Card, Divider } from 'react-native-elements'
- 
+import Emoji from 'react-native-emoji'
+  
 import FILTER_USER from '../graphql/queries/filterUser'
  
 class Users extends Component {
@@ -23,10 +24,10 @@ class Users extends Component {
 
   _renderAvailability(item){
     return(
-    <View>
-      {item && item.horarioManana ? <Text style={styles.textAvailability}>Mornings</Text> : null}
-      {item && item.horarioNoche ? <Text style={styles.textAvailability}>Evenings</Text> : null}
-      {item && item.horarioTarde ? <Text style={styles.textAvailability}>Afternoons</Text> : null}
+    <View style={{flexDirection: 'row'}}>
+      {item && item.horarioManana ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="sunrise"/></Text> : <Text style={{opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="sunrise"/></Text>}
+      {item && item.horarioNoche ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="city_sunset"/></Text> : <Text style={{opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="city_sunset"/></Text>}
+      {item && item.horarioTarde ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="night_with_stars"/></Text> : <Text style={{opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="night_with_stars"/></Text>}
     </View>
     )
   }
@@ -35,7 +36,7 @@ class Users extends Component {
     return (
       <TouchableOpacity onPress={() => this.props.navigation.navigate("UserDetail", { data: item })}>
         <Card style={styles.card}>
-          <Text>{item.alias}</Text>
+          <Text style={styles.textAvailability}>{item.alias}</Text>
           {this._renderAvailability(item)}
         </Card>
       </TouchableOpacity>
@@ -63,7 +64,7 @@ class Users extends Component {
             />
             <TouchableOpacity 
               style={styles.button} 
-              onPress={() => {this.props.data.refetch({
+              onPress={() => this.props.data.refetch({
                 alias: this.state.text, 
                 playOverwatch: false, 
                 playWow: false, 
@@ -74,7 +75,7 @@ class Users extends Component {
                 horarioManana: false,
                 horarioTarde: false,
                 horarioNoche: false
-              });this.setState({error:"No results found"})}}>
+              })}>
               <Text style={styles.buttonText}>FIND</Text>
             </TouchableOpacity>
           </View>
@@ -145,7 +146,7 @@ class Users extends Component {
             </View>
             <TouchableOpacity 
               style={styles.button}
-              onPress={() => {this.props.data.refetch({
+              onPress={() => this.props.data.refetch({
                 alias: "", 
                 playOverwatch: this.state.over, 
                 playWow: this.state.wow, 
@@ -156,14 +157,14 @@ class Users extends Component {
                 horarioManana: this.state.manana,
                 horarioTarde: this.state.tarde,
                 horarioNoche: this.state.noche
-              });this.setState({error:"No results found"})}}>
+              })}>
               <Text style={styles.buttonText}>FIND</Text>
             </TouchableOpacity>
             <FlatList
               data={data.filterUser}
               keyExtractor={item => item.alias}
               renderItem={this._renderItem}
-              ListEmptyComponent={<Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>{this.state.error}</Text>}
+              ListEmptyComponent={<Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>No Results found</Text>}
             />
           </View>
         </View>

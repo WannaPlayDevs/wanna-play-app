@@ -30,6 +30,7 @@
     "react-apollo": "^1.4.8",
     "react-native": "~0.55.2",
     "react-native-elements": "^0.19.1",
+    "react-native-emoji": "git+https://github.com/jorilallo/react-native-emoji.git",
     "react-native-modal": "^6.1.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-navigation-redux-helpers": "^1.1.2",

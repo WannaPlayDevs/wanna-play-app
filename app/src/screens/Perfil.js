@@ -3,7 +3,8 @@ import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncSt
 import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
 import { FontAwesome } from 'react-native-vector-icons'
-import { Button } from 'react-native-elements'
+import { Button, Divider } from 'react-native-elements'
+import Emoji from 'react-native-emoji'
  
 import { getUserInfo } from '../actions/user'
 import { logout } from '../actions/user';
@@ -48,7 +49,7 @@ class Perfil extends Component {
     ){
       return (
         <View style={{width: '90%', alignItems: 'center', margin: 20}}>
-          <Text style={{fontSize: 18, textAlign: 'center'}}>Provide us more information about yourself by pressing the blue pen icon</Text>
+          <Text style={{fontSize: 18, textAlign: 'center'}}>Edit your preferences by pressing <FontAwesome name="cog" size={20} color={'#3377F4'}/></Text>
         </View>
       )
     }
@@ -85,11 +86,15 @@ class Perfil extends Component {
   renderAvailability(){
     const { me } = this.props.data
     return(
-    <View style={{alignItems: 'center'}}>
-      {me && me.horarioManana ? <Text style={styles.textAvailability}>Mornings</Text> : null}
-      {me && me.horarioNoche ? <Text style={styles.textAvailability}>Evenings</Text> : null}
-      {me && me.horarioTarde ? <Text style={styles.textAvailability}>Afternoons</Text> : null}
-    </View>
+      <View style={{ alignItems: 'center', marginBottom: 10 }}>
+        <Text style={{ color: 'black', marginBottom: 5 }}>Availability</Text>
+        <View style={{ flexDirection: 'row' }}>
+
+          {me && me.horarioManana ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="sunrise" /></Text> : <Text style={{ opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="sunrise" /></Text>}
+          {me && me.horarioNoche ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="city_sunset" /></Text> : <Text style={{ opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="city_sunset" /></Text>}
+          {me && me.horarioTarde ? <Text style={{ fontSize: 30, marginHorizontal: 10 }}><Emoji name="night_with_stars" /></Text> : <Text style={{ opacity: 0.3, marginHorizontal: 10, fontSize: 30 }}><Emoji name="night_with_stars" /></Text>}
+        </View>
+      </View>
     )
   }
 
@@ -107,11 +112,12 @@ class Perfil extends Component {
             </View>
             <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black' }}>{me ? me.alias : null}</Text>
             <Text style={{color: 'black' }}>@{me ? me.username : null}</Text>
+            <Text style={{fontStyle: 'italic', marginTop: 5}}>"{me ? me.description : null}"</Text>
           </View>
           <View style={styles.userInfo}>
             <View style={styles.section}>
-              <Text style={{color: 'black' }}>Availability</Text>
-              {this.renderAvailability()}
+              <Text style={{color: 'black' }}>Location</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.country : null}</Text>
             </View>
             <View style={styles.section}>
               <Text style={{color: 'black' }}>Age</Text>
@@ -122,7 +128,11 @@ class Perfil extends Component {
               <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.language : null}</Text>
             </View>
           </View>
+          <View>
+            {this.renderAvailability()}
+          </View>
             {this.renderGames()}
+           
           <View style={{width: '100%', flexDirection: 'row'}}>
           <TouchableOpacity style={styles.button} onPress={this._logout}>
             <Text style={styles.buttonText}>LOG OUT</Text>
@@ -134,7 +144,7 @@ class Perfil extends Component {
               }}
               style={styles.edit}
           >
-            <FontAwesome name="pencil" size={25} color={'#3377F4'}/>
+            <FontAwesome name="cog" size={40} color={'#3377F4'}/>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -208,8 +218,8 @@ const styles = StyleSheet.create({
   },
   edit: {
     position: 'absolute',
-    top: 10,
-    right: 20,
+    top: 15,
+    right: 25,
     zIndex: 2
   }
 })

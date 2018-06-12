@@ -19,7 +19,6 @@ networkInterface.use([{
     }
     try {
       const token = await AsyncStorage.getItem('@token');
-      console.log('token de store', token)
       if (token != null) {
         req.options.headers.authorization = `jwt ${token}` || null;
       }
