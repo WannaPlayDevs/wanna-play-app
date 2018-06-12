@@ -34,6 +34,7 @@ export default class App extends Component {
   };
 
   render() {
+    console.disableYellowBox = true
     // const Layout = createRootNavigator(true)
     if (!this.state.appIsReady) {
       return <AppLoading />;
