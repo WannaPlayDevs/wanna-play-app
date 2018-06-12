@@ -57,7 +57,7 @@ class Users extends Component {
             <Text>Find fellow players by name...</Text>
             <TextInput 
                 style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
-                placeholder='Subject'
+                placeholder='Username'
                 underlineColorAndroid='transparent'
                 maxLength={30}
                 onChangeText={(text) => this.setState({text})}
@@ -87,18 +87,21 @@ class Users extends Component {
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Wow'
                   checked={this.state.wow}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({wow: !this.state.wow})}
                 />
                 <CheckBox
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='GTA'
                   checked={this.state.gta}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({gta: !this.state.gta})}
                 />
                 <CheckBox
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='OverWatch'
                   checked={this.state.over}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({over: !this.state.over})}
                 />
               </View>
@@ -107,18 +110,21 @@ class Users extends Component {
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Rust'
                   checked={this.state.rust}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({rust: !this.state.rust})}
                 />
                 <CheckBox
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='Fortnite'
                   checked={this.state.fort}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({fort: !this.state.fort})}
                 />
                 <CheckBox
                   containerStyle={{flexGrow: 1, backgroundColor: 'transparent'}}
                   title='PUBG'
                   checked={this.state.pubg}
+                  checkedColor='#3377F4'
                   onPress={() => this.setState({pubg: !this.state.pubg})}
                 />
               </View>
@@ -129,18 +135,21 @@ class Users extends Component {
                 containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
                 title='Morning'
                 checked={this.state.manana}
+                checkedColor='#3377F4'
                 onPress={() => this.setState({manana: !this.state.manana})}
               />
               <CheckBox
                 containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
                 title='Afternoon'
                 checked={this.state.tarde}
+                checkedColor='#3377F4'
                 onPress={() => this.setState({tarde: !this.state.tarde})}
               />
               <CheckBox
                 containerStyle={{flexGrow: 1, alignItems: 'center', backgroundColor: 'transparent'}}
                 title='Evening'
                 checked={this.state.noche}
+                checkedColor='#3377F4'
                 onPress={() => this.setState({noche: !this.state.noche})}
               />
             </View>
@@ -164,7 +173,7 @@ class Users extends Component {
               data={data.filterUser}
               keyExtractor={item => item.alias}
               renderItem={this._renderItem}
-              ListEmptyComponent={<Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>No Results found</Text>}
+              ListEmptyComponent={<Text style={{color: 'red', fontSize:20, alignSelf: 'center'}}>No results found</Text>}
             />
           </View>
         </View>
@@ -193,7 +202,7 @@ const styles = StyleSheet.create({
   button:{
     width: '100%', 
     padding: 10, 
-    backgroundColor: 'blue',
+    backgroundColor: '#3377F4',
     marginVertical: 10,
     borderRadius:4
   },

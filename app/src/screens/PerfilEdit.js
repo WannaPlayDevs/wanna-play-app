@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { withApollo, graphql } from 'react-apollo'
 import { CheckBox } from 'react-native-elements'
-import { Button } from 'react-native-elements';
+import { Button } from 'react-native-elements'
 
 import UPDATE_USER from '../graphql/mutations/editProfile'
 
@@ -78,53 +78,48 @@ class PerfilEdit extends Component {
     return (
       <ScrollView>
         <View style={{alignItems: 'center'}}>
-          <View style={{padding: 10, justifyContent: 'space-between', width: '100%', flexWrap: 'wrap', flexDirection: 'row',}}>
-            <View style={{marginRight: 10}}>
-              <Text style={{fontWeight: 'bold',}}>Alias</Text>
-              <TextInput
-                style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 5, width: 100}}
-                onChangeText={(text) => this.setState({alias: text})}
-                value={this.state.alias}
-                maxLength={15}
-              />
-            </View>
-            <View style={{marginRight: 10}}>
-              <Text style={{fontWeight: 'bold',}}>Age</Text>
-              <TextInput
-                style={{borderBottomWidth: 1, paddingVertical: 5, width: 40}}
-                onChangeText={(text) => this.setState({age: text})}
-                value={this.state.age}
-                maxLength={2}
-              />
-            </View>
-            <View style={{marginRight: 10}}>
-              <Text style={{fontWeight: 'bold',}}>Country</Text>
-              <TextInput
-                style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
-                onChangeText={(text) => this.setState({country: text})}
-                value={this.state.country}
-                maxLength={30}
-              />
-            </View>
-            <View style={{marginRight: 10}}>
-              <Text style={{fontWeight: 'bold',}}>Language</Text>
-              <TextInput
-                style={{borderBottomWidth: 1, paddingVertical: 5, width: 100}}
-                onChangeText={(text) => this.setState({language: text})}
-                value={this.state.language}
-                maxLength={30}
-              />
-            </View>
+          <View style={{padding: 10, justifyContent: 'space-between', width: '100%'}}>
+            <Text style={{fontWeight: 'bold',}}>Alias</Text>
+            <TextInput
+              style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
+              onChangeText={(text) => this.setState({alias: text})}
+              value={this.state.alias}
+              maxLength={15}
+              underlineColorAndroid='transparent'
+            />
+            <Text style={{fontWeight: 'bold',}}>Age</Text>
+            <TextInput
+              style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
+              onChangeText={(text) => this.setState({age: text})}
+              value={this.state.age}
+              maxLength={2}
+              underlineColorAndroid='transparent'
+            />
+            <Text style={{fontWeight: 'bold',}}>Location</Text>
+            <TextInput
+              style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
+              onChangeText={(text) => this.setState({country: text})}
+              value={this.state.country}
+              maxLength={30}
+              underlineColorAndroid='transparent'
+            />
+            <Text style={{fontWeight: 'bold',}}>Language</Text>
+            <TextInput
+              style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
+              onChangeText={(text) => this.setState({language: text})}
+              value={this.state.language}
+              maxLength={30}
+              underlineColorAndroid='transparent'
+            />
+            <Text style={{fontWeight: 'bold',}}>Bio</Text>
+            <TextInput
+              style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
+              onChangeText={(text) => this.setState({description: text})}
+              value={this.state.description}
+              maxLength={120}
+              underlineColorAndroid='transparent'
+            />
           </View>
-            <View style={{alignItems: 'center', width: '100%'}}>
-              <Text style={{fontWeight: 'bold',}}>Bio</Text>
-              <TextInput
-                style={{borderBottomWidth: 1, paddingVertical: 5, marginBottom: 10, width: '80%'}}
-                onChangeText={(text) => this.setState({description: text})}
-                value={this.state.description}
-                maxLength={120}
-              />
-            </View>
           <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
             <TouchableOpacity
               onPress={() => this.setState({playWow: !this.state.playWow})}
@@ -175,23 +170,27 @@ class PerfilEdit extends Component {
               />
             </TouchableOpacity>
           </View>
+          <Text style={{ color: 'black', marginTop: 5 }}>Availability</Text>
           <View style={{flexDirection: 'row', justifyContent:'center', flexWrap: 'wrap'}}>
             <CheckBox
-              title='Mañanas'
+              title='Morning'
               containerStyle={{backgroundColor: 'transparent'}}
               checked={this.state.horarioManana}
+              checkedColor='#3377F4'
               onPress={() => this.setState({horarioManana: !this.state.horarioManana})}
             />
             <CheckBox
-              title='Tardes'
+              title='Afternoon'
               containerStyle={{backgroundColor: 'transparent'}}
               checked={this.state.horarioTarde}
+              checkedColor='#3377F4'
               onPress={() => this.setState({horarioTarde: !this.state.horarioTarde})}
             />
             <CheckBox
-              title='Noches'
+              title='Evening'
               containerStyle={{backgroundColor: 'transparent'}}
               checked={this.state.horarioNoche}
+              checkedColor='#3377F4'
               onPress={() => this.setState({horarioNoche: !this.state.horarioNoche})}
             />
           </View>
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
   button:{
     width: '70%', 
     padding: 10, 
-    backgroundColor: '#03A9F4',
+    backgroundColor: '#3377F4',
     marginVertical: 10,
     borderRadius:4
   },

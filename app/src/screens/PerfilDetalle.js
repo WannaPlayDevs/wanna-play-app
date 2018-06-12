@@ -164,7 +164,7 @@ class PerfilDetalle extends Component {
             </View>
             <View style={styles.section}>
               <Text style={{ color: 'black' }}>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.language : null}</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black', textAlign: 'center' }}>{me ? me.language : null}</Text>
             </View>
           </View>
           <View>
@@ -172,7 +172,7 @@ class PerfilDetalle extends Component {
           </View>
           {this.renderGames()}
           <TouchableOpacity style={styles.edit} onPress={this._toggleModal}>
-            <FontAwesome name="envelope" color={'#03A9F4'} size={30} />
+            <FontAwesome name="envelope" color={'#3377F4'} size={30} />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
   edit: {
     position: 'absolute',
     top: 20,
-    right: 25,
+    right: 20,
     zIndex: 2
   }
 })
