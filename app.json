@@ -3,13 +3,18 @@
     "sdkVersion": "27.0.0",
     "orientation":"portrait",
     "name": "Wanna Play?",
-    "icon": "./app/assets/images/logo.png",
+    "icon": "./app/assets/images/logo-bckgrnd.png",
     "version": "1.0.0",
     "ios": {
       "bundleIdentifier": "com.wannaplaydevs.wannaplay"
     },
     "android": {
       "package": "com.wannaplaydevs.wannaplay"
+    },
+    "splash": {
+      "image": "./app/assets/images/logo-small.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#3377F4"
     }
   }
 }

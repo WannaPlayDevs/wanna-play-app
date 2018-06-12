@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet, FlatList, Image, StatusBar, AsyncSt
 import { graphql, compose, withApollo } from 'react-apollo'
 import { connect } from 'react-redux'
 import { FontAwesome } from 'react-native-vector-icons'
-import { Button, Divider } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import Emoji from 'react-native-emoji'
  
 import { getUserInfo } from '../actions/user'
@@ -125,14 +125,13 @@ class Perfil extends Component {
             </View>
             <View style={styles.section}>
               <Text style={{color: 'black' }}>Language</Text>
-              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black' }}>{me ? me.language : null}</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginTop: 5, color: 'black', textAlign: 'center' }}>{me ? me.language : null}</Text>
             </View>
           </View>
           <View>
             {this.renderAvailability()}
           </View>
-            {this.renderGames()}
-           
+          {this.renderGames()}
           <View style={{width: '100%', flexDirection: 'row'}}>
           <TouchableOpacity style={styles.button} onPress={this._logout}>
             <Text style={styles.buttonText}>LOG OUT</Text>
