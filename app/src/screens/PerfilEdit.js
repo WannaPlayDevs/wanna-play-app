@@ -91,7 +91,7 @@ class PerfilEdit extends Component {
             <TextInput
               style={{borderColor: 'gray', borderWidth: 1, marginVertical: 5, padding: 10, borderRadius: 10}}
               onChangeText={(text) => this.setState({age: text})}
-              value={this.state.age}
+              value={this.state.age ? this.state.age.toString() : null}
               maxLength={2}
               underlineColorAndroid='transparent'
             />
