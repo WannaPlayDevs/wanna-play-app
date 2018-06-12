@@ -21,6 +21,16 @@ class Signup extends Component {
     errors: [],
   }
 
+  _checkIfDisabled() {
+    const { alias, password, username } = this.state;
+
+    if (!alias || !password || !username) {
+      return true;
+    }
+
+    return false;
+  }
+
   _onChangeText = (text, type) => this.setState({ [type]: text })
 
   _toggleModal = () => this.setState({ modal: false });
@@ -47,8 +57,8 @@ class Signup extends Component {
 
   renderErrors () {
     const { errors } = this.state
-      if (errors[0] === 'UNIQUE constraint failed: auth_user.username'){
-        return 'El usuario ya existe'
+      if (errors[0] === 'UNIQUE constraint failed: usuarios_user.username'){
+        return 'Sorry. The username already exists'
       }
     }
 
@@ -96,6 +106,7 @@ class Signup extends Component {
           backgroundColor="#03A9F4"
           title="SIGN UP"
           onPress={this._onSignupPress}
+          disabled={this._checkIfDisabled()}
         />
         <FormValidationMessage>{this.state.errors.length > 0 ? this.renderErrors() : null}</FormValidationMessage>
       </Card>
